@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KaikeiApplication">
         <activity
+            android:name=".SaveItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".seva_item_activity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
