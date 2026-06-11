@@ -10,5 +10,7 @@
     <string name="tvSales">販売</string>
     <string name="tvItemSet">商品設定</string>
     <string name="tvBuyHistory">購入履歴</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
