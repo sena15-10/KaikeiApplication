@@ -45,7 +45,7 @@
 
     </LinearLayout>
 
-<!--    右下の+ボタン-->
+<!--    右下の+ ボタン-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fadAddProduct"
         android:layout_width="wrap_content"
