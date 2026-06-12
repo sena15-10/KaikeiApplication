@@ -13,4 +13,17 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="app_name">KaikeiApplication</string>
+<!--    商品登録フラグメント-->
+    <string name="titleProductRegister">商品登録</string>
+    <string name="labelNoProduct">商品がまだありません</string>
+    <string name="labelNoProductSub">先売りする商品を登録してください</string>
+    <string name="btnAddProduct">商品を追加</string>
+<!--    共通ボタン-->
+    <string name="btnSave">保存</string>
+    <string name="btnCancel">キャンセル</string>
+    <string name="btnDelete">削除</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    
 </resources>
