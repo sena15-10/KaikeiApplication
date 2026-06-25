@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- カート内数量バッジ用の背景（青い丸ピル型） -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/colorPrimaryBlue" />
+    <corners android:radius="50dp" />
+</shape>
