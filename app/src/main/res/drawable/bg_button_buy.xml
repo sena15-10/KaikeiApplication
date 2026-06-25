@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 購入するボタン用の背景（オレンジ色・角丸） -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/colorAccentOrange" />
+    <corners android:radius="28dp" />
+</shape>

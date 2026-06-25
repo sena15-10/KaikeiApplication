@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">会計・在庫管理マニ</string>
+    <string name="app_name">会計・在庫管理app</string>
+    <string name="titleSalesScreen">販売画面</string>
     <string name="tvStockItem">残り在庫数</string>
     <string name="tvTotalAmount">売上総額</string>
     <string name="tvInCart">カート内数量</string>
@@ -10,10 +11,11 @@
     <string name="tvSales">販売</string>
     <string name="tvItemSet">商品設定</string>
     <string name="tvBuyHistory">購入履歴</string>
+    <!-- 商品ごとの数量を増減させるステッパーボタン -->
+    <string name="btnMinus">−</string>
+    <string name="btnPlus">+</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="app_name">KaikeiApplication</string>
 <!--    商品登録フラグメント-->
     <string name="titleProductRegister">商品登録</string>
     <string name="labelNoProduct">商品がまだありません</string>
@@ -23,7 +25,5 @@
     <string name="btnSave">保存</string>
     <string name="btnCancel">キャンセル</string>
     <string name="btnDelete">削除</string>
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     
 </resources>
