@@ -43,7 +43,7 @@ class SalesFragment : Fragment() {
         val adapter = ProductAdapter(productList) {
             updateSummary(tvTotal, tvStock, tvCart, tvSales)  // 数量変化時に更新
         }
-        recycler.layoutManager = LinearLayoutManager(requireContext())
+        recycler.layoutManager = LinearLayoutManager(requireContext()) //縦方向に配置
         recycler.adapter = adapter
 
         // ── 初期表示の更新 ──

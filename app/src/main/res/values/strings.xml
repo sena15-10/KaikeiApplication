@@ -14,7 +14,7 @@
     <!-- 商品ごとの数量を増減させるステッパーボタン -->
     <string name="btnMinus">−</string>
     <string name="btnPlus">+</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
 
 <!--    商品登録フラグメント-->
     <string name="titleProductRegister">商品登録</string>
