@@ -1,13 +1,14 @@
 package com.example.kaikeiapplication
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
+import androidx.activity.enableEdgeToEdge
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -16,10 +17,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ProductRegisterFragment.newInstance] factory method to
+ * Use the [SaveItemFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ProductRegisterFragment : Fragment() {
+class SaveItemFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -30,19 +31,6 @@ class ProductRegisterFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val  addButton = view.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fadAddProduct)
-        android.widget.Toast.makeText(context, "ボタンが押されました！", android.widget.Toast.LENGTH_SHORT).show()
-        addButton?.setOnClickListener {
-            //(activity as? MainActivity)?.replaceFragment(ProductRegisterFragment())
-            (activity as? MainActivity)?.replaceFragment(SaveItemFragment())
-//            val intent = Intent(context, SaveItemActivity::class.java)
-//            startActivity(intent)
-        }
     }
 
     override fun onCreateView(
@@ -50,7 +38,15 @@ class ProductRegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_register, container, false)
+        return inflater.inflate(R.layout.fragment_save_item, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
+        super.onViewCreated(view, savedInstanceState)
+        (activity as? MainActivity)?.supportActionBar?.apply{
+            setDisplayHomeAsUpEnabled(true)
+            title = "商品設定"
+        }
     }
 
     companion object {
@@ -60,12 +56,12 @@ class ProductRegisterFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ProductRegisterFragment.
+         * @return A new instance of fragment SaveItemFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ProductRegisterFragment().apply {
+            SaveItemFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

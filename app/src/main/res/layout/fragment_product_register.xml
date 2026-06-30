@@ -13,49 +13,53 @@
         android:visibility="gone"/>
 
 <!--    空状態の表示(商品がないときに表示)-->
+
+    <!--    右下の+ ボタン-->
+
     <LinearLayout
         android:id="@+id/layoutEmpty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical"
-        android:gravity="center">
+        app:layout_anchor="@+id/layoutEmpty"
+        app:layout_anchorGravity="center">
 
-    <!--    箱のアイコン(画像に合わせて)-->
+        <!--    箱のアイコン(画像に合わせて)-->
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
 
-            android:contentDescription="@string/labelNoProduct"/>
+            android:contentDescription="@string/labelNoProduct" />
 
-    <!--    「商品がまだありません」-->
+        <!--    「商品がまだありません」-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="@string/labelNoProduct"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"/>
+            android:textSize="16sp" />
 
-    <!--    先売りする商品を登録してください-->
+        <!--    先売りする商品を登録してください-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="@string/labelNoProductSub"
-            android:textSize="12sp"
-            android:layout_marginTop="8dp"/>
+            android:textSize="12sp" />
 
     </LinearLayout>
 
-<!--    右下の+ ボタン-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fadAddProduct"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="96dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:contentDescription="@string/btnAddProduct"
-        app:srcCompat="@android:drawable/ic_input_add"/>
-
-
+        app:layout_anchor="@+id/layoutEmpty"
+        app:layout_anchorGravity="end|bottom"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

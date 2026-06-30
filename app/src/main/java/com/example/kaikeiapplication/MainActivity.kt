@@ -1,6 +1,7 @@
 package com.example.kaikeiapplication
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -46,9 +47,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    private fun replaceFragment(fragment: Fragment) {
+    public fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view_tag, fragment)
             .commit()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            // フラグメントの履歴（バックスタック）があれば、前のフラグメントに戻る
+            if (supportFragmentManager.backStackEntryCount > 0) {
+                supportFragmentManager.popBackStack()
+            } else {
+                finish() // 履歴がなければアクティビティを閉じる
+            }
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -2,6 +2,7 @@ package com.example.kaikeiapplication
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -17,7 +18,10 @@ class SaveItemActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.apply{
+            setDisplayHomeAsUpEnabled(true)
+            title = "商品登録"
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -29,4 +33,12 @@ class SaveItemActivity : AppCompatActivity() {
         }
         return returnVal
     }
+
+    override fun onCreatePanelView(featureId: Int): View? {
+        return super.onCreatePanelView(featureId)
+    }
+
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
+//        super.onViewCreated(view, savedInstanceState)
+//    }
 }
