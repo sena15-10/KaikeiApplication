@@ -6,6 +6,7 @@
         android:id="@+id/fragment_sales"
         android:title="@string/tvSales" />
     <item
+        android:icon="@drawable/settings"
         android:id="@+id/fragment_product_register"
         android:title="商品設定" />
     <item

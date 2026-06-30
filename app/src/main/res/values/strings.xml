@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">会計・在庫管理app</string>
     <string name="titleSalesScreen">販売画面</string>
-    <string name="app_name1">会計・在庫管理マニ</string>
     <string name="tvStockItem">残り在庫数</string>
     <string name="tvTotalAmount">売上総額</string>
     <string name="tvInCart">カート内数量</string>
@@ -26,7 +25,10 @@
     <string name="btnSave">保存</string>
     <string name="btnCancel">キャンセル</string>
     <string name="btnDelete">削除</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment2">Hello blank fragment</string>
+
+    <string name="label_stock">残り在庫数</string>
+    <string name="label_total">合計金額</string>
+    <string name="btn_purchase">購入する</string>
+
 
 </resources>
