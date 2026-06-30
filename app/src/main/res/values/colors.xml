@@ -2,4 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- 販売画面（fragment_sales.xml）専用カラー -->
+    <color name="colorPrimaryBlue">#2F6FE4</color>
+    <color name="colorAccentOrange">#F4511E</color>
+    <color name="colorTextGray">#757575</color>
+    <color name="colorDivider">#E0E0E0</color>
+    <color name="colorStepperBorder">#BDBDBD</color>
+
+    <color name="background_gray">#F5F5F5</color>
+    <color name="text_secondary">#757575</color>
+
 </resources>

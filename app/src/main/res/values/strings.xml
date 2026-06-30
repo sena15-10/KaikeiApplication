@@ -25,5 +25,10 @@
     <string name="btnSave">保存</string>
     <string name="btnCancel">キャンセル</string>
     <string name="btnDelete">削除</string>
-    
+
+    <string name="label_stock">残り在庫数</string>
+    <string name="label_total">合計金額</string>
+    <string name="btn_purchase">購入する</string>
+
+
 </resources>
