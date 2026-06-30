@@ -22,7 +22,10 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         if (savedInstanceState == null) {
-            replaceFragment(SalesFragment())
+            replaceFragment(SalesFragment())//このコードが画面遷移用のコード
+            supportFragmentManager.beginTransaction()
+//                .replace(R.id.main, SalesFragment()) 　//2行目のコードを書いてしまうと画面遷移がうまくいかない
+                .commit()
         }
 
         navView.setOnItemSelectedListener { item ->
