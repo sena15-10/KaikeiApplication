@@ -21,7 +21,7 @@
     <string name="labelNoProduct">商品がまだありません</string>
     <string name="labelNoProductSub">先売りする商品を登録してください</string>
     <string name="btnAddProduct">商品を追加</string>
-<!--    共通ボタン-->
+    <!--    共通ボタン-->
     <string name="btnSave">保存</string>
     <string name="btnCancel">キャンセル</string>
     <string name="btnDelete">削除</string>

@@ -3,15 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menuSales"
-        android:icon="@drawable/home"
+        android:id="@+id/fragment_sales"
         android:title="@string/tvSales" />
     <item
-        android:id="@+id/menuSetting"
         android:icon="@drawable/settings"
+        android:id="@+id/fragment_product_register"
         android:title="商品設定" />
     <item
-        android:id="@+id/menuHistory"
-        android:icon="@drawable/menu"
+        android:id="@+id/fragment_purchase_history"
         android:title="購入履歴" />
+
+
 </menu>
