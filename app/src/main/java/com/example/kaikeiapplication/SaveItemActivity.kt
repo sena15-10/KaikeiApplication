@@ -1,6 +1,7 @@
 package com.example.kaikeiapplication
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,5 +17,16 @@ class SaveItemActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var returnVal = true
+        if(item.itemId == android.R.id.home){
+            finish()
+        }else{
+            returnVal = super.onOptionsItemSelected(item)
+        }
+        return returnVal
     }
 }
