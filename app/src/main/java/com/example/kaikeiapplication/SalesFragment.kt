@@ -1,59 +1,74 @@
 package com.example.kaikeiapplication
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SalesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SalesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    // ── サンプルデータ（後でSharedPreferencesから読む想定）──
+    private val productList = mutableListOf(
+        Product(1, "サンド1", 500, 0, 50),
+        Product(2, "サンド2", 400, 0, 50),
+        Product(3, "サンド3", 350, 0, 50),
+    )
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_sales, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SalesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SalesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // ── Viewの取得 ──
+        val recycler  = view.findViewById<RecyclerView>(R.id.recyclerProducts)
+        val tvTotal   = view.findViewById<TextView>(R.id.tvGrandTotal)
+        val tvStock   = view.findViewById<TextView>(R.id.tvStockCount)
+        val tvCart    = view.findViewById<TextView>(R.id.tvCartCount)
+        val tvSales   = view.findViewById<TextView>(R.id.tvTotalAmount)
+        val btnBuy    = view.findViewById<Button>(R.id.btnPurchase)
+
+        // ── RecyclerViewのセットアップ ──
+        val adapter = ProductAdapter(productList) {
+            updateSummary(tvTotal, tvStock, tvCart, tvSales)  // 数量変化時に更新
+        }
+        recycler.layoutManager = LinearLayoutManager(requireContext()) //縦方向に配置
+        recycler.adapter = adapter
+
+        // ── 初期表示の更新 ──
+        updateSummary(tvTotal, tvStock, tvCart, tvSales)
+
+        // ── 購入ボタン ──
+        btnBuy.setOnClickListener {
+            val total = productList.sumOf { it.price * it.quantity }
+            Toast.makeText(requireContext(), "購入しました：¥$total", Toast.LENGTH_SHORT).show()
+            // ここに購入後の処理（数量リセット・履歴保存等）を追加する
+        }
+    }
+
+    // ── サマリー更新ヘルパー ──
+    private fun updateSummary(
+        tvTotal: TextView, tvStock: TextView,
+        tvCart: TextView, tvSales: TextView
+    ) {
+        val total    = productList.sumOf { it.price * it.quantity }
+        val cartQty  = productList.sumOf { it.quantity }
+        val minStock = productList.minOfOrNull { it.stock } ?: 0
+
+        tvTotal.text  = "¥$total"
+        tvCart.text   = "カート内数量：${cartQty}個"
+        tvStock.text  = minStock.toString()
+        tvSales.text  = "¥$total"
     }
 }

@@ -24,7 +24,7 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-
+            android:src="@drawable/box"
             android:contentDescription="@string/labelNoProduct"/>
 
     <!--    「商品がまだありません」-->
@@ -54,5 +54,8 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/btnAddProduct"
         app:srcCompat="@android:drawable/ic_input_add"/>
+
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
