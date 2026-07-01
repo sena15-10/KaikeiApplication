@@ -20,7 +20,6 @@
         android:id="@+id/layoutEmpty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:orientation="vertical"
         app:layout_anchor="@+id/layoutEmpty"
         app:layout_anchorGravity="center">
@@ -29,31 +28,31 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-
-            android:contentDescription="@string/labelNoProduct" />
+            android:src="@drawable/box"
+            android:contentDescription="@string/labelNoProduct"/>
 
         <!--    「商品がまだありません」-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@string/labelNoProduct"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
 
         <!--    先売りする商品を登録してください-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@string/labelNoProductSub"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"/>
 
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fadAddProduct"
         android:layout_width="wrap_content"
-        android:layout_height="96dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:contentDescription="@string/btnAddProduct"

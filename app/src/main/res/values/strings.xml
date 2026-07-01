@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name1">会計・在庫管理マニ</string>
+    <string name="app_name">会計・在庫管理app</string>
+    <string name="titleSalesScreen">販売画面</string>
     <string name="tvStockItem">残り在庫数</string>
     <string name="tvTotalAmount">売上総額</string>
     <string name="tvInCart">カート内数量</string>
@@ -10,11 +11,12 @@
     <string name="tvSales">販売</string>
     <string name="tvItemSet">商品設定</string>
     <string name="tvBuyHistory">購入履歴</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment1">Hello blank fragment</string>
+    <!-- 商品ごとの数量を増減させるステッパーボタン -->
+    <string name="btnMinus">−</string>
+    <string name="btnPlus">+</string>
 
-    <string name="app_name2">KaikeiApplication</string>
-    <!--    商品登録フラグメント-->
+
+<!--    商品登録フラグメント-->
     <string name="titleProductRegister">商品登録</string>
     <string name="labelNoProduct">商品がまだありません</string>
     <string name="labelNoProductSub">先売りする商品を登録してください</string>
@@ -23,12 +25,20 @@
     <string name="btnSave">保存</string>
     <string name="btnCancel">キャンセル</string>
     <string name="btnDelete">削除</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment2">Hello blank fragment</string>
+
+    <string name="label_stock">残り在庫数</string>
+    <string name="label_total">合計金額</string>
+    <string name="btn_purchase">購入する</string>
+
 
     <!--    商品追加フラグメント-->
-    <string name="backAction">商品画面に戻る</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="backAction">商品を追加</string>
+    <!-- 商品登録画面 -->
+    <string name="itemInformation">商品情報</string>
+    <string name="itemName">商品名</string>
+    <string name="itemPrice">価格</string>
+    <string name="inventorySettings">在庫設定</string>
+    <string name="initialStockQuantity">初期在庫数</string>
+
 
 </resources>

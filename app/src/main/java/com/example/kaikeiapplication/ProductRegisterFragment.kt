@@ -36,7 +36,6 @@ class ProductRegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val  addButton = view.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fadAddProduct)
-        android.widget.Toast.makeText(context, "ボタンが押されました！", android.widget.Toast.LENGTH_SHORT).show()
         addButton?.setOnClickListener {
             //(activity as? MainActivity)?.replaceFragment(ProductRegisterFragment())
             (activity as? MainActivity)?.replaceFragment(SaveItemFragment())
