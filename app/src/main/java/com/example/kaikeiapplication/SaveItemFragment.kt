@@ -1,6 +1,7 @@
 package com.example.kaikeiapplication
 
 import android.os.Bundle
+import android.support.v4.os.IResultReceiver
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -10,6 +11,8 @@ import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.doOnTextChanged
+import com.google.android.material.textfield.TextInputEditText
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,18 +45,44 @@ class SaveItemFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_save_item, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? MainActivity)?.supportActionBar?.apply{
+        (activity as? MainActivity)?.supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             title = "商品設定"
         }
+        val itemName = view.findViewById<TextInputEditText>(R.id.takoyaki)
+        val itemPrice = view.findViewById<TextInputEditText>(R.id.kingaku)
+        val itemCount = view.findViewById<TextInputEditText>(R.id.zaikosuu)
         val backButton = view.findViewById<Button>(R.id.registration)
+
+        backButton.isEnabled = false
+
         backButton?.setOnClickListener {
             (activity as? MainActivity)?.replaceFragment(ProductRegisterFragment())
-        }
-    }
 
+        }
+        fun checkInputs() {
+            val nameText = itemName.text.toString().trim()
+            val priceText = itemPrice.text.toString().trim()
+            val countText = itemCount.text.toString().trim()
+
+            val isBothFilled =
+                nameText.isNotEmpty() && priceText.isNotEmpty() && countText.isNotEmpty()
+
+            backButton.isEnabled = isBothFilled
+        }
+        itemName.doOnTextChanged { _, _, _, _ ->
+            checkInputs()
+        }
+        itemPrice.doOnTextChanged { _, _, _, _ ->
+            checkInputs()
+        }
+        itemCount.doOnTextChanged { _, _, _, _ ->
+            checkInputs()
+        }
+
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of

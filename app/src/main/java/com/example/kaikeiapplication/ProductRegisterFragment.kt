@@ -41,6 +41,7 @@ class ProductRegisterFragment : Fragment() {
             (activity as? MainActivity)?.replaceFragment(SaveItemFragment())
 //            val intent = Intent(context, SaveItemActivity::class.java)
 //            startActivity(intent)
+
         }
     }
 
