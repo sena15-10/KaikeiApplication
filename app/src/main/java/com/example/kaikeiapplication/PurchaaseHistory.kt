@@ -45,21 +45,24 @@ class PurchaaseHistory : Fragment() {
         setSalesInfo()
     }
     fun setSalesInfo() {
-        var sum = 0
-        var salesNum = 0
-        val salesCount = salesList.size
+        if (salesList == null){
+//            何もないってのと顔文字を表示するんゴねぇ
+        }else{
+            var sum = 0
+            var salesNum = 0
+            val salesCount = salesList.size
 
-        for (item in salesList) {
-            sum += item.quantity * item.price
-            salesNum += item.quantity
-        }
-        val tvSumSales = view?.findViewById<TextView>(R.id.tvSumSales)
-        val tvSalesCount = view?.findViewById<TextView>(R.id.tvSalesCount)
-        val tvSalesNum = view?.findViewById<TextView>(R.id.tvSalesNum)
-        tvSumSales?.text = sum.toString()
-        tvSalesCount?.text = salesCount.toString()
-        tvSalesNum?.text = salesNum.toString()
-
+            for (item in salesList) {
+                sum += item.quantity * item.price
+                salesNum += item.quantity
+            }
+            val tvSumSales = view?.findViewById<TextView>(R.id.tvSumSales)
+            val tvSalesCount = view?.findViewById<TextView>(R.id.tvSalesCount)
+            val tvSalesNum = view?.findViewById<TextView>(R.id.tvSalesNum)
+            tvSumSales?.text = sum.toString()
+            tvSalesCount?.text = salesCount.toString()
+            tvSalesNum?.text = salesNum.toString()
+            }
     }
 
 
