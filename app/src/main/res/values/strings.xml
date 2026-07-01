@@ -14,7 +14,7 @@
     <!-- 商品ごとの数量を増減させるステッパーボタン -->
     <string name="btnMinus">−</string>
     <string name="btnPlus">+</string>
-
+    <!-- TODO: Remove or change this placeholder text -->
 
 <!--    商品登録フラグメント-->
     <string name="titleProductRegister">商品登録</string>
@@ -29,6 +29,16 @@
     <string name="label_stock">残り在庫数</string>
     <string name="label_total">合計金額</string>
     <string name="btn_purchase">購入する</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment2">Hello blank fragment</string>
+<!-- 売上履歴-->
+    <string name="tvSammary">本日の売上サマリ</string>
+    <string name="tvBuymoney">売上金額</string>
+    <string name="tvKensu">販売件数</string>
+    <string name="tvBuycount">売上数</string>
+    <string name="tvRireki">取引履歴</string>
+    <string name="tvEntanni">¥</string>
 
 
 </resources>
