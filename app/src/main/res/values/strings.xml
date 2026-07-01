@@ -33,6 +33,17 @@
 
     <string name="hello_blank_fragment2">Hello blank fragment</string>
 
+    <!--    商品追加フラグメント-->
+    <string name="backAction">商品を追加</string>
+    <!-- 商品登録画面 -->
+    <string name="itemInformation">商品情報</string>
+    <string name="itemName">商品名</string>
+    <string name="itemPrice">価格</string>
+    <string name="inventorySettings">在庫設定</string>
+    <string name="initialStockQuantity">初期在庫数</string>
+    <string name="registration">商品を登録する</string>
+
+
     <!-- 売上履歴 -->
     <string name="tvSammary">本日の売上サマリ</string>
     <string name="tvBuymoney">売上金額</string>
