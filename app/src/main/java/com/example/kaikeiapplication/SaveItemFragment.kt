@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -46,6 +47,10 @@ class SaveItemFragment : Fragment() {
         (activity as? MainActivity)?.supportActionBar?.apply{
             setDisplayHomeAsUpEnabled(true)
             title = "商品設定"
+        }
+        val backButton = view.findViewById<Button>(R.id.registration)
+        backButton?.setOnClickListener {
+            (activity as? MainActivity)?.replaceFragment(ProductRegisterFragment())
         }
     }
 

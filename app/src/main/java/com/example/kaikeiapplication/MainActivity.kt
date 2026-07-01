@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
     public fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view_tag, fragment)
+            .addToBackStack(null)
             .commit()
     }
 

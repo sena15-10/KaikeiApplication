@@ -39,6 +39,7 @@
     <string name="itemPrice">価格</string>
     <string name="inventorySettings">在庫設定</string>
     <string name="initialStockQuantity">初期在庫数</string>
+    <string name="registration">商品を登録する</string>
 
 
 </resources>
