@@ -18,8 +18,8 @@ class SalesAdapter(private val itemList: List<SalesItem>) :
     override fun onBindViewHolder(holder: SalesViewHolder, position: Int) {
         val item = itemList[position]
         holder.tvProductName.text = item.productName
-        holder.tvQuantity.text = item.quantity
-        holder.tvPrice.text = item.price
+        holder.tvQuantity.text = item.quantity.toString()
+        holder.tvPrice.text = item.price.toString()
         holder.tvDate.text = item.date
     }
     // リストの総数を返す

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">会計・在庫管理app</string>
     <string name="titleSalesScreen">販売画面</string>
+    <string name="app_name1">会計・在庫管理マニ</string>
     <string name="tvStockItem">残り在庫数</string>
     <string name="tvTotalAmount">売上総額</string>
     <string name="tvInCart">カート内数量</string>
@@ -14,14 +15,14 @@
     <!-- 商品ごとの数量を増減させるステッパーボタン -->
     <string name="btnMinus">−</string>
     <string name="btnPlus">+</string>
-    <!-- TODO: Remove or change this placeholder text -->
 
-<!--    商品登録フラグメント-->
+    <!-- 商品登録フラグメント -->
     <string name="titleProductRegister">商品登録</string>
     <string name="labelNoProduct">商品がまだありません</string>
     <string name="labelNoProductSub">先売りする商品を登録してください</string>
     <string name="btnAddProduct">商品を追加</string>
-    <!--    共通ボタン-->
+
+    <!-- 共通ボタン -->
     <string name="btnSave">保存</string>
     <string name="btnCancel">キャンセル</string>
     <string name="btnDelete">削除</string>
@@ -30,15 +31,13 @@
     <string name="label_total">合計金額</string>
     <string name="btn_purchase">購入する</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment2">Hello blank fragment</string>
-<!-- 売上履歴-->
+
+    <!-- 売上履歴 -->
     <string name="tvSammary">本日の売上サマリ</string>
     <string name="tvBuymoney">売上金額</string>
     <string name="tvKensu">販売件数</string>
     <string name="tvBuycount">売上数</string>
     <string name="tvRireki">取引履歴</string>
     <string name="tvEntanni">¥</string>
-
-
 </resources>
