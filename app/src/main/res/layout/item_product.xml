@@ -52,7 +52,7 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
             app:cornerRadius="4dp"
-            app:layout_constraintEnd_toStartOf="@id/listQuantityS"
+            app:layout_constraintEnd_toStartOf="@id/tvQuantity"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 

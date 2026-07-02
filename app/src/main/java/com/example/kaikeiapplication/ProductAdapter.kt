@@ -19,10 +19,10 @@ class ProductAdapter(
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvName:     TextView = view.findViewById(R.id.listPrductName)
         val tvPrice:    TextView = view.findViewById(R.id.listProductPrice)
-        val tvQuantity: TextView = view.findViewById(R.id.listQuantityS)
+        val tvQuantity: TextView = view.findViewById(R.id.tvQuantity)
         val tvSubtotal: TextView = view.findViewById(R.id.listSubtotal)
         val btnMinus:   Button   = view.findViewById(R.id.editBtn)
-        val btnPlus:    Button   = view.findViewById(R.id.deleteBtn)
+        val btnPlus:    Button   = view.findViewById(R.id.btnPlus)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
