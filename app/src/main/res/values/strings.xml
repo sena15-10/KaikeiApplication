@@ -60,6 +60,6 @@
     <string name="tvBuycount">売上数</string>
     <string name="tvRireki">取引履歴</string>
     <string name="tvEntanni">¥</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+<!--    何もないとき-->
+    <string name="tvNothing">なにもない</string>
 </resources>

@@ -43,9 +43,30 @@ class PurchaaseHistory : Fragment() {
         // レイアウトマネージャーの設定（縦方向のリスト表示）
         rvSalesHistory.layoutManager = LinearLayoutManager(requireContext())
         rvSalesHistory.adapter = adapter
+        setSalesInfo()
+    }
+    fun setSalesInfo() {
+        val tvNothing = view?.findViewById<TextView>(R.id.tvNothing)
+        val layoutNothing = view?.findViewById<View>(R.id.nothingImg)
+        if (salesList.isEmpty()){
+            tvNothing?.visibility = View.VISIBLE
+            layoutNothing?.visibility = View.VISIBLE
+        }else{
+            var sum = 0
+            var salesNum = 0
+            val salesCount = salesList.size
 
-        // 画面下部の集計情報（合計金額など）を更新します
-        updateSalesSummary(view)
+            for (item in salesList) {
+                sum += item.quantity * item.price
+                salesNum += item.quantity
+            }
+            val tvSumSales = view?.findViewById<TextView>(R.id.tvSumSales)
+            val tvSalesCount = view?.findViewById<TextView>(R.id.tvSalesCount)
+            val tvSalesNum = view?.findViewById<TextView>(R.id.tvSalesNum)
+            tvSumSales?.text = sum.toString()
+            tvSalesCount?.text = salesCount.toString()
+            tvSalesNum?.text = salesNum.toString()
+            }
     }
 
     /**
