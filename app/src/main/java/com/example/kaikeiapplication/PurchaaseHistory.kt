@@ -1,7 +1,5 @@
 package com.example.kaikeiapplication
 
-
-import SalesItem
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,57 +8,49 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kaikeiapplication.database.AppDatabase
 
 /**
  * 販売履歴画面を表示するためのフラグメントクラスです。
+ * データベース（Room）から実際の販売履歴を取得して表示します。
  */
 class PurchaaseHistory : Fragment() {
 
-    // 表示用のテスト用データリスト
-    private val salesList = mutableListOf<SalesItem>(
-        SalesItem("イチゴクリーム", 2, 250, "2026-01-01"),
-        SalesItem("クッキー＆クリーム", 3, 250, "2026-01-01"),
-        SalesItem("桜餡", 1, 250, "2026-01-01")
-    )
-
-    // フラグメントのレイアウトを作成し、ビューを返します
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // fragment_purchaase_history レイアウトをインフレート（生成）します
         return inflater.inflate(R.layout.fragment_purchaase_history, container, false)
     }
 
-    // ビューが作成された直後に呼び出される初期化処理です
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // RecyclerView（履歴リスト）の取得とアダプターの紐付け
         val rvSalesHistory = view.findViewById<RecyclerView>(R.id.rvSalesHistory)
-        val adapter = SalesAdapter(salesList)
-
-        // レイアウトマネージャーの設定（縦方向のリスト表示）
         rvSalesHistory.layoutManager = LinearLayoutManager(requireContext())
-        rvSalesHistory.adapter = adapter
 
-        // 画面下部の集計情報（合計金額など）を更新します
-        updateSalesSummary(view)
+        // データベースからデータを取得して監視
+        val dao = AppDatabase.getDatabase(requireContext()).salesDao()
+        
+        // getAllSales() は LiveData<List<SalesItem>> を返すので、データが変わるたびに実行される
+        dao.getAllSales().observe(viewLifecycleOwner) { salesList ->
+            // 取得したデータをアダプターにセット
+            val adapter = SalesAdapter(salesList)
+            rvSalesHistory.adapter = adapter
+
+            // 画面上部の集計情報を更新
+            updateSalesSummary(view, salesList)
+        }
     }
 
     /**
-     * 販売リストに基づいて集計（合計金額、販売数、取引数）を計算し、UIに反映します。
-     * @param rootView 検索対象となる親ビュー
+     * データベースから取得したリストに基づいて集計を計算し、UIに反映します。
      */
-    private fun updateSalesSummary(rootView: View) {
-        // 合計金額の算出 (数量 × 単価 の合計)
+    private fun updateSalesSummary(rootView: View, salesList: List<SalesItem>) {
         val totalAmount = salesList.sumOf { it.quantity * it.price }
-        // 総販売個数の算出
         val totalQuantity = salesList.sumOf { it.quantity }
-        // 取引件数 (リストの要素数)
         val transactionCount = salesList.size
 
-        // 各TextViewに計算結果をセット
         rootView.findViewById<TextView>(R.id.tvSumSales)?.text = totalAmount.toString()
         rootView.findViewById<TextView>(R.id.tvSalesCount)?.text = transactionCount.toString()
         rootView.findViewById<TextView>(R.id.tvSalesNum)?.text = totalQuantity.toString()
