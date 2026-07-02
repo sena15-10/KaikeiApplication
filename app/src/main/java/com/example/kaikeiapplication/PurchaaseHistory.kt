@@ -1,6 +1,6 @@
 package com.example.kaikeiapplication
 
-import SalesAdapter
+
 import SalesItem
 import android.os.Bundle
 import androidx.fragment.app.Fragment

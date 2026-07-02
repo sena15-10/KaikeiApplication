@@ -1,5 +1,6 @@
 import java.util.Date
 
+
 data class SalesItem(
     val productName: String,
     val quantity: Int,

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_nav_menu">
     <item
         android:id="@+id/fragment_sales"
         android:title="@string/tvSales" />
     <item
-        android:icon="@drawable/settings"
         android:id="@+id/fragment_product_register"
         android:title="商品設定" />
     <item
