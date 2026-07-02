@@ -38,6 +38,7 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/textView14"
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintHorizontal_bias="0.454"
             app:layout_constraintStart_toEndOf="@+id/tvSalesCount"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="12" />
