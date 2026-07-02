@@ -56,10 +56,11 @@ class SaveItemFragment : Fragment() {
         val itemCount = view.findViewById<TextInputEditText>(R.id.zaikosuu)
         val backButton = view.findViewById<Button>(R.id.registration)
 
+//        商品設定欄が3つとも埋まっていないと登録できない
         backButton.isEnabled = false
 
         backButton?.setOnClickListener {
-            (activity as? MainActivity)?.replaceFragment(ProductRegisterFragment())
+            (activity as? MainActivity)?.replaceFragment(ProductList())
 
         }
         fun checkInputs() {

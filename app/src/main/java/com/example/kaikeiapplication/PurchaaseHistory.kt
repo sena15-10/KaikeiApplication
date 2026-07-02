@@ -1,7 +1,7 @@
 package com.example.kaikeiapplication
 
 
-import SalesItem
+import com.example.kaikeiapplication.SalesItem
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,9 +18,9 @@ class PurchaaseHistory : Fragment() {
 
     // 表示用のテスト用データリスト
     private val salesList = mutableListOf<SalesItem>(
-        SalesItem("イチゴクリーム", 2, 250, "2026-01-01"),
-        SalesItem("クッキー＆クリーム", 3, 250, "2026-01-01"),
-        SalesItem("桜餡", 1, 250, "2026-01-01")
+        SalesItem(1,"イチゴクリーム", 2, 250, "2026-01-01"),
+        SalesItem(2,"クッキー＆クリーム", 3, 250, "2026-01-01"),
+        SalesItem(3,"桜餡", 1, 250, "2026-01-01")
     )
 
     // フラグメントのレイアウトを作成し、ビューを返します
