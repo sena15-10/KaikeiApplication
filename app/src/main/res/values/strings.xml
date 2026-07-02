@@ -40,4 +40,6 @@
     <string name="tvBuycount">売上数</string>
     <string name="tvRireki">取引履歴</string>
     <string name="tvEntanni">¥</string>
+<!--    何もないとき-->
+    <string name="tvNothing">なにもない</string>
 </resources>

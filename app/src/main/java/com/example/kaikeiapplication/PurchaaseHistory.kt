@@ -17,9 +17,9 @@ import java.util.Date
 class PurchaaseHistory : Fragment() {
 
     private val salesList = mutableListOf<SalesItem>(
-        SalesItem("イチゴクリーム",2,250, "2026-01-01"),
-        SalesItem("クッキー＆クリーム",3,250,"2026-01-01"),
-        SalesItem("桜餡",1,250,"2026-01-01")
+//        SalesItem("イチゴクリーム",2,250, "2026-01-01"),
+//        SalesItem("クッキー＆クリーム",3,250,"2026-01-01"),
+//        SalesItem("桜餡",1,250,"2026-01-01")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,8 +45,11 @@ class PurchaaseHistory : Fragment() {
         setSalesInfo()
     }
     fun setSalesInfo() {
-        if (salesList == null){
-//            何もないってのと顔文字を表示するんゴねぇ
+        val tvNothing = view?.findViewById<TextView>(R.id.tvNothing)
+        val layoutNothing = view?.findViewById<View>(R.id.nothingImg)
+        if (salesList.isEmpty()){
+            tvNothing?.visibility = View.VISIBLE
+            layoutNothing?.visibility = View.VISIBLE
         }else{
             var sum = 0
             var salesNum = 0
