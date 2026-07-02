@@ -17,12 +17,12 @@ class ProductAdapter(
 ) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvName:     TextView = view.findViewById(R.id.tvProductName)
-        val tvPrice:    TextView = view.findViewById(R.id.tvProductPrice)
-        val tvQuantity: TextView = view.findViewById(R.id.tvQuantity)
-        val tvSubtotal: TextView = view.findViewById(R.id.tvSubtotal)
-        val btnMinus:   Button   = view.findViewById(R.id.btnMinus)
-        val btnPlus:    Button   = view.findViewById(R.id.btnPlus)
+        val tvName:     TextView = view.findViewById(R.id.listPrductName)
+        val tvPrice:    TextView = view.findViewById(R.id.listProductPrice)
+        val tvQuantity: TextView = view.findViewById(R.id.listQuantityS)
+        val tvSubtotal: TextView = view.findViewById(R.id.listSubtotal)
+        val btnMinus:   Button   = view.findViewById(R.id.editBtn)
+        val btnPlus:    Button   = view.findViewById(R.id.deleteBtn)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -16,7 +16,7 @@
 
         <!-- 商品名 -->
         <TextView
-            android:id="@+id/tvProductName"
+            android:id="@+id/listPrductName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="商品名"
@@ -24,23 +24,23 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnMinus" />
+            app:layout_constraintEnd_toStartOf="@id/editBtn" />
 
         <!-- 単価 -->
         <TextView
-            android:id="@+id/tvProductPrice"
+            android:id="@+id/listProductPrice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="¥0 / 個"
             android:textSize="13sp"
             android:textColor="@android:color/darker_gray"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvProductName"
-            app:layout_constraintEnd_toStartOf="@id/btnMinus" />
+            app:layout_constraintTop_toBottomOf="@id/listPrductName"
+            app:layout_constraintEnd_toStartOf="@id/editBtn" />
 
         <!-- ー ボタン -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnMinus"
+            android:id="@+id/editBtn"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="32dp"
             android:layout_height="32dp"
@@ -52,7 +52,7 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
             app:cornerRadius="4dp"
-            app:layout_constraintEnd_toStartOf="@id/tvQuantity"
+            app:layout_constraintEnd_toStartOf="@id/listQuantityS"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -64,7 +64,7 @@
             android:text="0"
             android:textSize="16sp"
             android:gravity="center"
-            app:layout_constraintEnd_toStartOf="@id/btnPlus"
+            app:layout_constraintEnd_toStartOf="@id/deleteBtn"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -82,13 +82,13 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
             app:cornerRadius="4dp"
-            app:layout_constraintEnd_toStartOf="@id/tvSubtotal"
+            app:layout_constraintEnd_toStartOf="@id/listSubtotal"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <!-- 小計金額 -->
         <TextView
-            android:id="@+id/tvSubtotal"
+            android:id="@+id/listSubtotal"
             android:layout_width="72dp"
             android:layout_height="wrap_content"
             android:text="¥0"
