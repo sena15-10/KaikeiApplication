@@ -12,14 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 class SalesAdapter(private val itemList: List<SalesItem>) :
     RecyclerView.Adapter<SalesAdapter.SalesViewHolder>() {
 
-    /**
-     * 1行分の売上データ表示に必要なビュー（UI部品）を保持するクラスです。
-     */
     class SalesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvProductName: TextView = itemView.findViewById(R.id.tvProductName) // 商品名
-        val tvQuantity: TextView = itemView.findViewById(R.id.tvQuantity)       // 数量
-        val tvPrice: TextView = itemView.findViewById(R.id.tvPrice)             // 単価
-        val tvDate: TextView = itemView.findViewById(R.id.tvDate)               // 販売日
+        val tvProductName: TextView = itemView.findViewById(R.id.tvProductName)
+        val tvQuantity: TextView = itemView.findViewById(R.id.tvQuantity)
+        val tvPrice: TextView = itemView.findViewById(R.id.tvPrice)
+        val tvDate: TextView = itemView.findViewById(R.id.tvDate)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesViewHolder {
