@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <!-- 商品名 -->
+            <TextView
+                android:id="@+id/listPrductName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="商品名"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/editBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!-- 単価 -->
+            <TextView
+                android:id="@+id/listProductPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="¥0 / 個"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/listSubtotal"
+                app:layout_constraintEnd_toStartOf="@+id/listSubtotal"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- ー ボタン -->
+
+            <!-- 数量 -->
+
+            <!-- ＋ ボタン -->
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editBtn"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/editBtn"
+                android:textSize="18sp"
+                app:cornerRadius="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/deleteBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/deleteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginTop="8dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/deleteBtn"
+                android:textSize="18sp"
+                app:cornerRadius="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.4" />
+
+            <TextView
+                android:id="@+id/listSubtotal"
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/listQuantityS"
+                app:layout_constraintStart_toEndOf="@+id/listProductPrice"
+                app:layout_constraintTop_toBottomOf="@+id/listPrductName"
+                tools:text="在庫数" />
+
+            <TextView
+                android:id="@+id/listQuantityS"
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/editBtn"
+                app:layout_constraintTop_toBottomOf="@+id/listPrductName"
+                tools:text="10" />
+
+            <!-- 小計金額 -->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

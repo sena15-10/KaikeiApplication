@@ -43,6 +43,15 @@
     <string name="initialStockQuantity">初期在庫数</string>
     <string name="registration">商品を登録する</string>
 
+<!--    商品登録一覧-->
+    <string name="registered_items_list">登録済み商品一覧</string>
+    <string name="numberType">登録済み商品数</string>
+    <string name="countLabel">個</string>
+    <string name="totalStock">合計在庫</string>
+<!--    登録リスト-->
+    <string name="deleteBtn">削除</string>
+    <string name="editBtn">編集</string>
+
 
     <!-- 売上履歴 -->
     <string name="tvSammary">本日の売上サマリ</string>
@@ -51,4 +60,6 @@
     <string name="tvBuycount">売上数</string>
     <string name="tvRireki">取引履歴</string>
     <string name="tvEntanni">¥</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
