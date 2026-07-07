@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SaveItemActivity">
+    tools:context=".SaveItemFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardSummary"
@@ -16,7 +16,8 @@
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:ignore="DuplicateIds">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

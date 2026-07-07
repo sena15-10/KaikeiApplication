@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kaikeiapplication.model.SalesItem
 
 /**
  * 販売履歴（売上データ）をリスト表示するためのアダプタークラスです。

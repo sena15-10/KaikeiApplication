@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kaikeiapplication.database.AppDatabase
+import com.example.kaikeiapplication.model.SalesItem
 
 /**
  * 販売履歴画面を表示するためのフラグメントクラスです。
