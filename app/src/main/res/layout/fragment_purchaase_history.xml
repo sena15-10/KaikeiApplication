@@ -5,7 +5,7 @@
     android:id="@+id/tvGoukeiMoney"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PurchaaseHistory">
+    tools:context=".saleshistory.PurchaaseHistory">
 
 
     <androidx.constraintlayout.widget.Guideline

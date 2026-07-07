@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kaikeiapplication.model.ItemList
+import com.example.kaikeiapplication.model.Product
 
 
-class ListAdapter(private val itemList: List<ItemList>) :
+class ListAdapter(private val product: List<Product>) :
     RecyclerView.Adapter<ListAdapter.SalesViewHolder>(){
 
     class SalesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -34,7 +34,7 @@ class ListAdapter(private val itemList: List<ItemList>) :
         holder: SalesViewHolder,
         position: Int
     ) {
-        val item = itemList[position]
+        val item = product[position]
 
         holder.listProductName.text = item.name
         holder.listQuantity.text = item.stock.toString()
@@ -44,7 +44,7 @@ class ListAdapter(private val itemList: List<ItemList>) :
 
 
     override fun getItemCount(): Int {
-        return itemList.size
+        return product.size
     }
 }
 

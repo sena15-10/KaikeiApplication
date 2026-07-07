@@ -6,7 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.kaikeiapplication.model.ItemList
+import com.example.kaikeiapplication.model.Product
 
 /**
  * DAO (Data Access Object)
@@ -21,27 +21,27 @@ interface RegistrationDao {
 
     /**
      * 【登録】新しいデータをデータベースに保存します。
-     * @param itemList 保存したい商品のデータ（1件分）
+     * @param product 保存したい商品のデータ（1件分）
      *
      * suspend（サスペンド）:
      * データベースの操作は時間がかかることがあるため、スマホの画面が固まらないように
      * 「裏側（バックグラウンド）」でこっそり実行するための印です。
      */
     @Insert
-    suspend fun insert(itemList : ItemList)
+    suspend fun insert(product : Product)
 
     /**
      * 【更新】すでにあるデータの内容を最新の状態に書き換えます。
      * 例えば、商品の名前や価格を修正した時に使います。
      */
     @Update
-    suspend fun update(item: ItemList)
+    suspend fun update(item: Product)
 
     /**
      * 【削除】指定したデータをデータベースから完全に消去します。
      */
     @Delete
-    suspend fun delete(item: ItemList)
+    suspend fun delete(item: Product)
 
     /**
      * 【検索・取得】特定の条件に合うデータをデータベースから取り出します。
@@ -57,5 +57,5 @@ interface RegistrationDao {
      * @return 条件に一致する商品のリスト（自動監視機能付き）
      */
     @Query("SELECT * FROM items WHERE stock <= :threshold")
-    fun getLowStockItems(threshold: Int): LiveData<List<ItemList>>
+    fun getLowStockItems(threshold: Int): LiveData<List<Product>>
 }

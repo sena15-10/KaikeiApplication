@@ -1,4 +1,4 @@
-package com.example.kaikeiapplication
+package com.example.kaikeiapplication.saleshistory
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kaikeiapplication.R
+import com.example.kaikeiapplication.saleshistory.SalesAdapter
 import com.example.kaikeiapplication.database.AppDatabase
 import com.example.kaikeiapplication.model.SalesItem
 import kotlin.math.ceil
@@ -66,7 +68,7 @@ class PurchaaseHistory : Fragment() {
         }
 
         // 4. データベースからデータを取得して監視
-        val dao = AppDatabase.getDatabase(requireContext()).salesDao()
+        val dao = AppDatabase.Companion.getDatabase(requireContext()).salesDao()
 
         // getAllSales() は LiveData<List<SalesItem>> を返すので、データが変わるたびに実行される
         dao.getAllSales().observe(viewLifecycleOwner) { updatedList ->

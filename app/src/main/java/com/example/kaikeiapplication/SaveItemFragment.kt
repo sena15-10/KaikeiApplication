@@ -1,21 +1,16 @@
 package com.example.kaikeiapplication
 
 import android.os.Bundle
-import android.support.v4.os.IResultReceiver
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.example.kaikeiapplication.database.AppDatabase
-import com.example.kaikeiapplication.model.ItemList
+import com.example.kaikeiapplication.model.Product
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,7 +52,7 @@ class SaveItemFragment : Fragment() {
             val price = itemPrice.text.toString().toIntOrNull() ?: 0
             val stock = itemCount.text.toString().toIntOrNull() ?: 0
 
-            val newItem = ItemList(
+            val newItem = Product(
                 name = name,
                 price = price,
                 stock = stock,

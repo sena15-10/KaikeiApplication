@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.kaikeiapplication.model.ItemList
+import com.example.kaikeiapplication.model.Product
 import com.example.kaikeiapplication.model.SalesItem
 
 /**
@@ -13,7 +13,7 @@ import com.example.kaikeiapplication.model.SalesItem
  *
  * @Database: 保存するエンティティ（データ構造）とバージョンを指定します。
  */
-@Database(entities = [SalesItem::class, ItemList::class],
+@Database(entities = [SalesItem::class, Product::class],
     version = 1,
     exportSchema = false)
 

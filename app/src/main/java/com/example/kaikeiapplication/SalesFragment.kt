@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kaikeiapplication.database.AppDatabase
+import com.example.kaikeiapplication.model.Product
 import com.example.kaikeiapplication.model.SalesItem
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -22,9 +23,9 @@ class SalesFragment : Fragment() {
 
     // ── サンプルデータ（後で設定から取得する想定）──
     private val productList = mutableListOf(
-        Product(1, "サンド1", 500, 0, 50),
-        Product(2, "サンド2", 400, 0,50),
-        Product(3, "サンド3", 350, 0,50),
+        Product(id = 1, name = "サンド1", stock = 50, price = 500, description = null, barcode = null, createdAt = System.currentTimeMillis(), updatedAt = System.currentTimeMillis(), deletedAt = null),
+        Product(id = 2, name = "サンド2", stock = 50, price = 400, description = null, barcode = null, createdAt = System.currentTimeMillis(), updatedAt = System.currentTimeMillis(), deletedAt = null),
+        Product(id = 3, name = "サンド3", stock = 50, price = 350, description = null, barcode = null, createdAt = System.currentTimeMillis(), updatedAt = System.currentTimeMillis(), deletedAt = null),
     )
 
     override fun onCreateView(
