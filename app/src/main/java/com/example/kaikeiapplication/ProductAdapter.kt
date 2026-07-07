@@ -78,6 +78,6 @@ class ProductAdapter(
             }
         }
     }
-
+//
     override fun getItemCount() = products.size
 }
