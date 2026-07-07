@@ -144,8 +144,8 @@
                         android:id="@+id/kingaku"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="例）100万円"
-                        android:inputType="text|textAutoComplete" />
+                        android:hint="例）100"
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
