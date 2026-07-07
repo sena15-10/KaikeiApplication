@@ -28,6 +28,18 @@
 
 
         <!-- 単価 -->
+
+        <TextView
+            android:id="@+id/labelStock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tvStockItem"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="72dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/listProductPrice"
             android:layout_width="0dp"
@@ -40,6 +52,18 @@
             app:layout_constraintEnd_toStartOf="@id/btnMinus" />
 
         <!-- ー ボタン -->
+
+        <TextView
+            android:id="@+id/tvStockCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_marginStart="96dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/labelStock" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnMinus"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"

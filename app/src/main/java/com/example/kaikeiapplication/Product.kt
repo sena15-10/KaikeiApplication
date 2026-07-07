@@ -5,5 +5,5 @@ data class Product(
     val name: String,//商品名
     val price: Int,//単価
     var quantity: Int,//カート入れた数量
-    val stock: Int//在庫数
+    var stock: Int//在庫数
 )
