@@ -1,6 +1,5 @@
 package com.example.kaikeiapplication
 
-import SalesItem
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,33 +9,19 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlin.math.ceil
 import com.example.kaikeiapplication.database.AppDatabase
+import kotlin.math.ceil
 
 /**
  * 販売履歴画面を表示するためのフラグメントクラスです。
- * データベース（Room）から実際の販売履歴を取得して表示します。
+ * データベース（Room）から実際の販売履歴を取得し、ページネーション表示します。
  */
 class PurchaaseHistory : Fragment() {
 
     // ── 定数・変数 ──────────────────────────────
     private val PAGE_SIZE = 5
     private var currentPage = 0
-
-    // テストデータ
-    private val salesList = mutableListOf<SalesItem>(
-        SalesItem("サンドイッチ1", 2, 500, "2026-01-01"),
-        SalesItem("サンドイッチ1", 4, 500, "2026-01-01"),
-        SalesItem("サンドイッチ1", 4, 500, "2026-01-01"),
-        SalesItem("サンドイッチ1", 4, 500, "2026-01-01"),
-        SalesItem("サンドイッチ1", 4, 500, "2026-01-01"),
-        SalesItem("サンドイッチ1", 4, 500, "2026-01-01"),
-        SalesItem("サンドイッチ2", 1, 400, "2026-01-02"),
-        SalesItem("サンドイッチ2", 3, 400, "2026-01-02"),
-        SalesItem("サンドイッチ3", 2, 350, "2026-01-03"),
-        SalesItem("サンドイッチ3", 5, 350, "2026-01-03"),
-        SalesItem("サンドイッチ3", 1, 350, "2026-01-03"),
-    )
+    private var salesList: List<SalesItem> = emptyList()
 
     private lateinit var adapter: SalesAdapter
 
@@ -49,7 +34,6 @@ class PurchaaseHistory : Fragment() {
         return inflater.inflate(R.layout.fragment_purchaase_history, container, false)
     }
 
-    // ★重要：Viewに関する処理はすべてここに移します
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -80,9 +64,22 @@ class PurchaaseHistory : Fragment() {
             }
         }
 
-        // 4. 初期表示
-        showPage(tvPageInfo, btnPrev, btnNext)
-        updateSalesSummary(view)
+        // 4. データベースからデータを取得して監視
+        val dao = AppDatabase.getDatabase(requireContext()).salesDao()
+
+        // getAllSales() は LiveData<List<SalesItem>> を返すので、データが変わるたびに実行される
+        dao.getAllSales().observe(viewLifecycleOwner) { updatedList ->
+            salesList = updatedList
+
+            // データ件数が減ってページが範囲外になった場合は補正する
+            val totalPages = calcTotalPages()
+            if (currentPage > totalPages - 1) {
+                currentPage = totalPages - 1
+            }
+
+            showPage(tvPageInfo, btnPrev, btnNext)
+            updateSalesSummary(view, salesList)
+        }
     }
 
     // ── ヘルパーメソッド ─────────────────────────
@@ -113,23 +110,6 @@ class PurchaaseHistory : Fragment() {
     private fun calcTotalPages(): Int {
         if (salesList.isEmpty()) return 1
         return ceil(salesList.size.toDouble() / PAGE_SIZE).toInt()
-    }
-
-    private fun updateSalesSummary(rootView: View) {
-        rvSalesHistory.layoutManager = LinearLayoutManager(requireContext())
-
-        // データベースからデータを取得して監視
-        val dao = AppDatabase.getDatabase(requireContext()).salesDao()
-        
-        // getAllSales() は LiveData<List<SalesItem>> を返すので、データが変わるたびに実行される
-        dao.getAllSales().observe(viewLifecycleOwner) { salesList ->
-            // 取得したデータをアダプターにセット
-            val adapter = SalesAdapter(salesList)
-            rvSalesHistory.adapter = adapter
-
-            // 画面上部の集計情報を更新
-            updateSalesSummary(view, salesList)
-        }
     }
 
     /**
