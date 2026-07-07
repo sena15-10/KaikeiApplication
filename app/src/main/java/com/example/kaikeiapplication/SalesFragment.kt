@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kaikeiapplication.database.AppDatabase
+import com.example.kaikeiapplication.model.SalesItem
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date

@@ -1,7 +1,7 @@
-package com.example.kaikeiapplication
+package com.example.kaikeiapplication.model
+
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.Date
 
 @Entity(tableName = "sales")
 data class SalesItem(

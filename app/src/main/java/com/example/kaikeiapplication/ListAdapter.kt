@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-
+import com.example.kaikeiapplication.model.ItemList
 
 
 class ListAdapter(private val itemList: List<ItemList>) :
@@ -36,8 +36,8 @@ class ListAdapter(private val itemList: List<ItemList>) :
     ) {
         val item = itemList[position]
 
-        holder.listProductName.text = item.name.toString()
-        holder.listQuantity.text = item.quantity.toString()
+        holder.listProductName.text = item.name
+        holder.listQuantity.text = item.stock.toString()
         holder.listProductPrice.text = item.price.toString()
     }
 

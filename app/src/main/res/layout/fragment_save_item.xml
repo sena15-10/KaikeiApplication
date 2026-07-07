@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SaveItemActivity">
+    tools:context=".SaveItemFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardSummary"
+        android:id="@+id/cardInventoryStock1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
@@ -16,15 +16,17 @@
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:ignore="DuplicateIds">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardInventory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tvItemInfoTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/inventorySettings"
@@ -39,7 +41,7 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/initialStockQuantity"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@+id/tvItemInfoTitle" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
@@ -73,7 +75,6 @@
 
         <!-- ② 在庫サマリーカード -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardSummary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -87,11 +88,12 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/tvItemInformation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/itemInformation"
                     android:textSize="20sp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -117,11 +119,11 @@
                     android:id="@+id/tvItemNameLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:text="@string/itemName"
                     android:textSize="16sp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvItemInformation" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -165,6 +167,6 @@
         android:text="@string/registration"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardSummary" />
+        app:layout_constraintTop_toBottomOf="@+id/cardInventoryStock1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

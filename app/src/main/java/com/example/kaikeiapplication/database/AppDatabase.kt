@@ -4,7 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.kaikeiapplication.SalesItem
+import com.example.kaikeiapplication.model.ItemList
+import com.example.kaikeiapplication.model.SalesItem
 
 /**
  * アプリ全体のデータベースを管理する抽象クラスです。
@@ -12,7 +13,10 @@ import com.example.kaikeiapplication.SalesItem
  *
  * @Database: 保存するエンティティ（データ構造）とバージョンを指定します。
  */
-@Database(entities = [SalesItem::class], version = 1, exportSchema = false)
+@Database(entities = [SalesItem::class, ItemList::class],
+    version = 1,
+    exportSchema = false)
+
 abstract class AppDatabase : RoomDatabase() {
 
     /**
@@ -20,7 +24,7 @@ abstract class AppDatabase : RoomDatabase() {
      * 実装はRoomが自動生成します。
      */
     abstract fun salesDao(): SalesDao
-   
+    abstract  fun registrationDao() : RegistrationDao
     companion object {
         /**
          * データベースのインスタンスを保持します。

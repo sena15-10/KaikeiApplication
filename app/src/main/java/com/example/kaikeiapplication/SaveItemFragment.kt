@@ -8,33 +8,25 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.lifecycleScope
+import com.example.kaikeiapplication.database.AppDatabase
+import com.example.kaikeiapplication.model.ItemList
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SaveItemFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SaveItemFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -54,13 +46,41 @@ class SaveItemFragment : Fragment() {
         val itemName = view.findViewById<TextInputEditText>(R.id.takoyaki)
         val itemPrice = view.findViewById<TextInputEditText>(R.id.kingaku)
         val itemCount = view.findViewById<TextInputEditText>(R.id.zaikosuu)
-        val backButton = view.findViewById<Button>(R.id.registration)
+        val registerButton = view.findViewById<Button>(R.id.registration)
 
 //        商品設定欄が3つとも埋まっていないと登録できない
-        backButton.isEnabled = false
+        registerButton.isEnabled = false
+        //登録ボタン押されたときの処理
+        registerButton?.setOnClickListener {
 
-        backButton?.setOnClickListener {
-            (activity as? MainActivity)?.replaceFragment(ProductList())
+            val name = itemName.text.toString().trim()
+            val price = itemPrice.text.toString().toIntOrNull() ?: 0
+            val stock = itemCount.text.toString().toIntOrNull() ?: 0
+
+            val newItem = ItemList(
+                name = name,
+                price = price,
+                stock = stock,
+                description = null, // 今回はなし
+                barcode = null,     // 今回はなし
+                createdAt = System.currentTimeMillis(), // 作成した時間
+                updatedAt = System.currentTimeMillis(), // 更新した時間
+                deletedAt = null
+            )
+
+            //データベースの保存(重たい処理はlifecycleScopeで非同期処理(裏側処理))
+            lifecycleScope.launch(Dispatchers.IO){
+                val db = AppDatabase.getDatabase(requireContext())
+                db.registrationDao().insert(newItem)
+
+                //４，保存が終わったら、元の画面に戻る(画面操作はメインスレッドで行う)
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "${name}を登録しました", Toast.LENGTH_SHORT).show()
+
+                    (activity as? MainActivity)?.replaceFragment(ProductRegisterFragment())
+                }
+                (activity as? MainActivity)?.replaceFragment(ProductList())
+            }
 
         }
         fun checkInputs() {
@@ -68,10 +88,9 @@ class SaveItemFragment : Fragment() {
             val priceText = itemPrice.text.toString().trim()
             val countText = itemCount.text.toString().trim()
 
-            val isBothFilled =
-                nameText.isNotEmpty() && priceText.isNotEmpty() && countText.isNotEmpty()
+            val isBothFilled =nameText.isNotEmpty() && priceText.isNotEmpty() && countText.isNotEmpty()
 
-            backButton.isEnabled = isBothFilled
+            registerButton.isEnabled = isBothFilled
         }
         itemName.doOnTextChanged { _, _, _, _ ->
             checkInputs()
@@ -84,23 +103,9 @@ class SaveItemFragment : Fragment() {
         }
 
     }
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SaveItemFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SaveItemFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
+//    private inner class RegisterButtonClickListener : View.OnClickListener {
+//        override fun onClick(v: View?) {
+//
+//    }
 }
