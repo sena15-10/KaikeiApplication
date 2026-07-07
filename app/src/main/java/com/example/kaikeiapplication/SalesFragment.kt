@@ -23,8 +23,8 @@ class SalesFragment : Fragment() {
     // ── サンプルデータ（後で設定から取得する想定）──
     private val productList = mutableListOf(
         Product(1, "サンド1", 500, 0, 50),
-        Product(2, "サンド2", 400, 0, 50),
-        Product(3, "サンド3", 350, 0, 50),
+        Product(2, "サンド2", 400, 0,50),
+        Product(3, "サンド3", 350, 0,50),
     )
 
     override fun onCreateView(
@@ -41,20 +41,19 @@ class SalesFragment : Fragment() {
         // ── Viewの取得 ──
         val recycler  = view.findViewById<RecyclerView>(R.id.recyclerProducts)
         val tvTotal   = view.findViewById<TextView>(R.id.tvGrandTotal)
-        val tvStock   = view.findViewById<TextView>(R.id.tvStockCount)
         val tvCart    = view.findViewById<TextView>(R.id.tvCartCount)
         val tvSales   = view.findViewById<TextView>(R.id.tvTotalAmount)
         val btnBuy    = view.findViewById<Button>(R.id.btnPurchase)
 
         // ── RecyclerViewのセットアップ ──
         val adapter = ProductAdapter(productList) {
-            updateSummary(tvTotal, tvStock, tvCart, tvSales)  // 数量変化時に更新
+            updateSummary(tvTotal, tvCart, tvSales)  // 数量変化時に更新
         }
         recycler.layoutManager = LinearLayoutManager(requireContext())
         recycler.adapter = adapter
 
         // ── 初期表示の更新 ──
-        updateSummary(tvTotal, tvStock, tvCart, tvSales)
+        updateSummary(tvTotal, tvCart, tvSales)
 
         // ── 購入ボタン ──
         btnBuy.setOnClickListener {
@@ -91,7 +90,7 @@ class SalesFragment : Fragment() {
                 
                 // 表示を更新
                 adapter.notifyDataSetChanged()
-                updateSummary(tvTotal, tvStock, tvCart, tvSales)
+                updateSummary(tvTotal, tvCart, tvSales)
 
                 Toast.makeText(requireContext(), "購入データを保存しました：¥$total", Toast.LENGTH_SHORT).show()
             }
@@ -100,16 +99,14 @@ class SalesFragment : Fragment() {
 
     // ── サマリー更新ヘルパー ──
     private fun updateSummary(
-        tvTotal: TextView, tvStock: TextView,
+        tvTotal: TextView,
         tvCart: TextView, tvSales: TextView
     ) {
         val total    = productList.sumOf { it.price * it.quantity }
         val cartQty  = productList.sumOf { it.quantity }
-        val minStock = productList.minOfOrNull { it.stock - it.quantity } ?: 0
 
         tvTotal.text  = "¥$total"
         tvCart.text   = "カート内数量：${cartQty}個"
-        tvStock.text  = minStock.toString()
         tvSales.text  = "¥$total"
     }
 }

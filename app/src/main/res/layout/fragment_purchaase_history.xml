@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/textView14"
@@ -99,10 +99,13 @@
             android:id="@+id/tvSumSales"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="270dp"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/textView12"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView16"
             tools:text="1000" />
 
@@ -111,11 +114,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/textView13"
-            app:layout_constraintEnd_toStartOf="@+id/tvSalesNum"
-            app:layout_constraintStart_toEndOf="@+id/tvSumSales"
+            app:layout_constraintEnd_toEndOf="@+id/textView13"
+            app:layout_constraintStart_toStartOf="@+id/textView13"
             tools:text="7" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -123,7 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.9" />
+            app:layout_constraintGuide_percent="0.96" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"
@@ -150,9 +152,8 @@
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintBottom_toTopOf="@+id/layoutPagination"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15"
         app:layout_constraintVertical_bias="0.0" />
@@ -190,5 +191,49 @@
         app:layout_constraintTop_toBottomOf="@+id/nothingImg"
         app:layout_constraintVertical_bias="0.0"
         tools:visibility="visible" />
+
+    <!-- ページネーションUI（前へ・ページ番号・次へ） -->
+    <LinearLayout
+        android:id="@+id/layoutPagination"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- 前へボタン -->
+        <Button
+            android:id="@+id/btnPrev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="前へ"
+            android:textSize="14sp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+        <!-- ページ番号表示 -->
+        <TextView
+            android:id="@+id/tvPageInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="1 / 1 ページ"
+            android:textSize="14sp"
+            android:textColor="#333333" />
+
+        <!-- 次へボタン -->
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="次へ"
+            android:textSize="14sp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
