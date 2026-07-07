@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * 販売履歴（売上データ）をリスト表示するためのアダプタークラスです。
  */
-class SalesAdapter(private val itemList: List<SalesItem>) :
+class SalesAdapter(private var itemList: List<SalesItem>) :
     RecyclerView.Adapter<SalesAdapter.SalesViewHolder>() {
 
     class SalesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -27,7 +27,7 @@ class SalesAdapter(private val itemList: List<SalesItem>) :
 
     override fun onBindViewHolder(holder: SalesViewHolder, position: Int) {
         val item = itemList[position]
-        
+
         holder.tvProductName.text = item.productName
         holder.tvQuantity.text = "${item.quantity} 個"
         holder.tvPrice.text = "¥${item.price}"
@@ -35,4 +35,13 @@ class SalesAdapter(private val itemList: List<SalesItem>) :
     }
 
     override fun getItemCount(): Int = itemList.size
+
+    /**
+     * 表示するデータリストを差し替えて再描画する
+     * ページが切り替わるたびにこのメソッドを呼ぶ
+     */
+    fun updateData(newList: List<SalesItem>) {
+        itemList = newList
+        notifyDataSetChanged()
+    }
 }
