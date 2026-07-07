@@ -8,12 +8,18 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kaikeiapplication.database.AppDatabase
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class SalesFragment : Fragment() {
 
-    // ── サンプルデータ（後でSharedPreferencesから読む想定）──
+    // ── サンプルデータ（後で設定から取得する想定）──
     private val productList = mutableListOf(
         Product(1, "サンド1", 500, 0, 50),
         Product(2, "サンド2", 400, 0, 50),
@@ -43,7 +49,7 @@ class SalesFragment : Fragment() {
         val adapter = ProductAdapter(productList) {
             updateSummary(tvTotal, tvStock, tvCart, tvSales)  // 数量変化時に更新
         }
-        recycler.layoutManager = LinearLayoutManager(requireContext()) //縦方向に配置
+        recycler.layoutManager = LinearLayoutManager(requireContext())
         recycler.adapter = adapter
 
         // ── 初期表示の更新 ──
@@ -51,9 +57,43 @@ class SalesFragment : Fragment() {
 
         // ── 購入ボタン ──
         btnBuy.setOnClickListener {
-            val total = productList.sumOf { it.price * it.quantity }
-            Toast.makeText(requireContext(), "購入しました：¥$total", Toast.LENGTH_SHORT).show()
-            // ここに購入後の処理（数量リセット・履歴保存等）を追加する
+            // 1. カートに入っている商品（数量 > 0）を抽出
+            val cartItems = productList.filter { it.quantity > 0 }
+            
+            if (cartItems.isEmpty()) {
+                Toast.makeText(requireContext(), "カートが空です", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val total = cartItems.sumOf { it.price * it.quantity }
+            val dateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault())
+            val dateString = dateFormat.format(Date())
+
+            // 2. データベースへの保存処理 (非同期)
+            lifecycleScope.launch {
+                val dao = AppDatabase.getDatabase(requireContext()).salesDao()
+                
+                cartItems.forEach { product ->
+                    val salesItem = SalesItem(
+                        productName = product.name,
+                        quantity = product.quantity,
+                        price = product.price,
+                        date = dateString
+                    )
+                    // コメントアウト：ここでDBに1件ずつ保存
+                    dao.insert(salesItem)
+                }
+
+                // 3. 処理後のクリーンアップ
+                // コメントアウト：カート内数量をすべて0にリセット
+                productList.forEach { it.quantity = 0 }
+                
+                // 表示を更新
+                adapter.notifyDataSetChanged()
+                updateSummary(tvTotal, tvStock, tvCart, tvSales)
+
+                Toast.makeText(requireContext(), "購入データを保存しました：¥$total", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -64,7 +104,7 @@ class SalesFragment : Fragment() {
     ) {
         val total    = productList.sumOf { it.price * it.quantity }
         val cartQty  = productList.sumOf { it.quantity }
-        val minStock = productList.minOfOrNull { it.stock } ?: 0
+        val minStock = productList.minOfOrNull { it.stock - it.quantity } ?: 0
 
         tvTotal.text  = "¥$total"
         tvCart.text   = "カート内数量：${cartQty}個"

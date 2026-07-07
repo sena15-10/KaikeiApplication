@@ -21,14 +21,11 @@
         android:text="サンドイッチ１"
         android:textColor="#000000"
         android:textSize="14sp"
-        app2:layout_constraintBottom_toBottomOf="parent"
-        app2:layout_constraintStart_toStartOf="parent"
-        app2:layout_constraintTop_toTopOf="parent"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tvQuantity"
         app:layout_constraintHorizontal_weight="3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_top_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- 金額 -->
 
@@ -49,7 +46,7 @@
         app:layout_constraintEnd_toStartOf="@id/tvPrice"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toEndOf="@id/tvProductName"
-        app:layout_top_toTopOf="parent" />
+/>
 
     <TextView
         android:id="@+id/tvPrice"
@@ -58,15 +55,12 @@
         android:gravity="end"
         android:text="¥1000"
         android:textColor="#000000"
-        app2:layout_constraintBottom_toBottomOf="parent"
-        app2:layout_constraintEnd_toStartOf="@+id/tvDate"
-        app2:layout_constraintStart_toEndOf="@+id/tvQuantity"
-        app2:layout_constraintTop_toTopOf="parent"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tvDate"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toEndOf="@id/tvQuantity"
-        app:layout_top_toTopOf="parent" />
+/>
 
     <TextView
         android:id="@+id/tvDate"
@@ -75,13 +69,11 @@
         android:gravity="end"
         android:text="2026-01-01"
         android:textColor="#666666"
-        app2:layout_constraintBottom_toBottomOf="parent"
-        app2:layout_constraintEnd_toEndOf="parent"
-        app2:layout_constraintTop_toTopOf="parent"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="3"
         app:layout_constraintStart_toEndOf="@id/tvPrice"
-        app:layout_top_toTopOf="parent" />
+/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

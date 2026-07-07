@@ -10,15 +10,23 @@ import androidx.recyclerview.widget.RecyclerView
 // ① SalesAdapter の始まり（ここから）
 class SalesAdapter(private var itemList: List<SalesItem>) :
     RecyclerView.Adapter<SalesAdapter.SalesViewHolder>() {
-    // 1行分のレイアウト（XML）を読み込む
+
+    class SalesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvProductName: TextView = itemView.findViewById(R.id.tvProductName)
+        val tvQuantity: TextView = itemView.findViewById(R.id.tvQuantity)
+        val tvPrice: TextView = itemView.findViewById(R.id.tvPrice)
+        val tvDate: TextView = itemView.findViewById(R.id.tvDate)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesViewHolder {
         var view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_sales_row, parent, false)
         return SalesViewHolder(view)
     }
-    // 指定された位置（position）のデータを、Viewにセットする
+
     override fun onBindViewHolder(holder: SalesViewHolder, position: Int) {
         val item = itemList[position]
+        
         holder.tvProductName.text = item.productName
         holder.tvQuantity.text = "${item.quantity}個"
         holder.tvPrice.text = item.price.toString()

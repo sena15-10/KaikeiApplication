@@ -11,7 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.ceil
+import com.example.kaikeiapplication.database.AppDatabase
 
+/**
+ * 販売履歴画面を表示するためのフラグメントクラスです。
+ * データベース（Room）から実際の販売履歴を取得して表示します。
+ */
 class PurchaaseHistory : Fragment() {
 
     // ── 定数・変数 ──────────────────────────────
@@ -111,6 +116,26 @@ class PurchaaseHistory : Fragment() {
     }
 
     private fun updateSalesSummary(rootView: View) {
+        rvSalesHistory.layoutManager = LinearLayoutManager(requireContext())
+
+        // データベースからデータを取得して監視
+        val dao = AppDatabase.getDatabase(requireContext()).salesDao()
+        
+        // getAllSales() は LiveData<List<SalesItem>> を返すので、データが変わるたびに実行される
+        dao.getAllSales().observe(viewLifecycleOwner) { salesList ->
+            // 取得したデータをアダプターにセット
+            val adapter = SalesAdapter(salesList)
+            rvSalesHistory.adapter = adapter
+
+            // 画面上部の集計情報を更新
+            updateSalesSummary(view, salesList)
+        }
+    }
+
+    /**
+     * データベースから取得したリストに基づいて集計を計算し、UIに反映します。
+     */
+    private fun updateSalesSummary(rootView: View, salesList: List<SalesItem>) {
         val totalAmount = salesList.sumOf { it.quantity * it.price }
         val totalQuantity = salesList.sumOf { it.quantity }
         val transactionCount = salesList.size
