@@ -15,7 +15,7 @@ class ListAdapter(private var product: List<Product>,
     RecyclerView.Adapter<ListAdapter.SalesViewHolder>(){
 
     class SalesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val listProductName: TextView = itemView.findViewById(R.id.listPrductName) // 商品名
+        val listProductName: TextView = itemView.findViewById(R.id.listProductName) // 商品名
         val listQuantity: TextView = itemView.findViewById(R.id.listQuantityS)       // 数量
         val listProductPrice: TextView = itemView.findViewById(R.id.listProductPrice)             // 単価
         val editBtn: Button = itemView.findViewById<Button>(R.id.editBtn)     // 編集ボタン

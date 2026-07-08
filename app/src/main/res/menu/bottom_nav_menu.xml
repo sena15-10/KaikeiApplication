@@ -4,12 +4,15 @@
     android:id="@+id/bottom_nav_menu">
     <item
         android:id="@+id/fragment_sales"
+        android:icon="@drawable/home"
         android:title="@string/tvSales" />
     <item
         android:id="@+id/fragment_product_register"
+        android:icon="@drawable/settings"
         android:title="商品設定" />
     <item
         android:id="@+id/fragment_purchase_history"
+        android:icon="@drawable/menu"
         android:title="購入履歴" />
 
 

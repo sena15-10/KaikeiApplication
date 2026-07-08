@@ -20,7 +20,7 @@
 
             <!-- 商品名 -->
             <TextView
-                android:id="@+id/listPrductName"
+                android:id="@+id/listProductName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="商品名"
@@ -42,6 +42,12 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/listSubtotal"
                 app:layout_constraintEnd_toStartOf="@+id/listSubtotal"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- ー ボタン -->
+
+            <!-- 数量 -->
+
+            <!-- ＋ ボタン -->
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/editBtn"
@@ -93,8 +99,10 @@
                 android:gravity="center"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/listSubtotal"
-                app:layout_constraintTop_toBottomOf="@+id/listPrductName"
+                app:layout_constraintTop_toBottomOf="@+id/listProductName"
                 tools:text="10" />
+
+            <!-- 小計金額 -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

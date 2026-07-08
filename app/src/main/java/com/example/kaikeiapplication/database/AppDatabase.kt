@@ -14,7 +14,7 @@ import com.example.kaikeiapplication.model.SalesItem
  * @Database: 保存するエンティティ（データ構造）とバージョンを指定します。
  */
 @Database(entities = [SalesItem::class, Product::class],
-    version = 1,
+    version = 2,
     exportSchema = false)
 
 abstract class AppDatabase : RoomDatabase() {
@@ -45,7 +45,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_database" // 保存されるデータベースのファイル名
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }
