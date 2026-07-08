@@ -45,8 +45,8 @@
                 android:text="¥0 / 個"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/listProductName" />
+                app:layout_constraintBaseline_toBaselineOf="@+id/listSubtotal"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/editBtn"
