@@ -52,11 +52,10 @@ class ProductAdapter(
             // 在庫数（product.stock）を超えない範囲で、商品の数量を1増やす
             if (product.quantity < product.stock + product.quantity) {
                 product.quantity++
-                product.stock--
-                
+
                 // 特定の行の表示（数量と小計）を更新するためにアダプターへ通知
                 notifyItemChanged(position)
-                
+
                 // Fragment側の合計金額表示などを更新するためのコールバックを実行
                 onQuantityChanged()
             }
@@ -69,16 +68,14 @@ class ProductAdapter(
             // 数量が0より大きい場合のみ、数量を1減らす（マイナスにはしない）
             if (product.quantity > 0) {
                 product.quantity--
-                product.stock++
-                
+
                 // 表示を更新するためにアダプターへ通知
                 notifyItemChanged(position)
-                
+
                 // Fragment側の合計金額表示などを更新
                 onQuantityChanged()
             }
         }
     }
-//
     override fun getItemCount() = products.size
 }
