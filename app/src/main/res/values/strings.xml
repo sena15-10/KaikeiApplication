@@ -62,4 +62,10 @@
     <string name="tvEntanni">¥</string>
 <!--    何もないとき-->
     <string name="tvNothing">なにもない</string>
+
+
+<!--削除するとき-->
+    <string name="tvdelete">商品を削除しますか？</string>
+    <string name="yesBtn">削除する</string>
+    <string name="noBtn">キャンセル</string>
 </resources>

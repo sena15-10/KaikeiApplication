@@ -11,7 +11,8 @@ import com.example.kaikeiapplication.model.Product
 
 
 class ListAdapter(private var product: List<Product>,
-        private val onEditClick: (Product) -> Unit) : //編集ボタンを押したとき
+        private val onEditClick: (Product) -> Unit, //編集ボタンを押したとき
+        private val onDeleteClick: (Product) -> Unit) : //削除ボタンを押したとき
     RecyclerView.Adapter<ListAdapter.SalesViewHolder>(){
 
     class SalesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -41,6 +42,9 @@ class ListAdapter(private var product: List<Product>,
         //編集ボタンが押されたときに、渡された関数を実行する
         holder.itemView.findViewById<Button>(R.id.editBtn).setOnClickListener {
             onEditClick(item)
+        }
+        holder.itemView.findViewById<Button>(R.id.deleteBtn).setOnClickListener {
+            onDeleteClick(item)
         }
         Log.d("ITEM" , "$item")
         holder.listProductName.text = item.name
