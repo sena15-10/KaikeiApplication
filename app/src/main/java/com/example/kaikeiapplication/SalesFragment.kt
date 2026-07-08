@@ -21,12 +21,9 @@ import java.util.Locale
 
 class SalesFragment : Fragment() {
 
-    // ── サンプルデータ（後で設定から取得する想定）──
-    private val productList = mutableListOf(
-        Product(id = 1, name = "サンド1", stock = 50, price = 500, description = null, barcode = null, createdAt = System.currentTimeMillis(), updatedAt = System.currentTimeMillis(), deletedAt = null),
-        Product(id = 2, name = "サンド2", stock = 50, price = 400, description = null, barcode = null, createdAt = System.currentTimeMillis(), updatedAt = System.currentTimeMillis(), deletedAt = null),
-        Product(id = 3, name = "サンド3", stock = 50, price = 350, description = null, barcode = null, createdAt = System.currentTimeMillis(), updatedAt = System.currentTimeMillis(), deletedAt = null),
-    )
+    // 1. サンプルデータは空にしておく（または宣言のみにする）
+    private val productList = mutableListOf<Product>()
+    private lateinit var adapter: ProductAdapter // クラス全体で使えるよ
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,63 +44,70 @@ class SalesFragment : Fragment() {
         val btnBuy    = view.findViewById<Button>(R.id.btnPurchase)
 
         // ── RecyclerViewのセットアップ ──
-        val adapter = ProductAdapter(productList) {
+        adapter = ProductAdapter(productList) {
             updateSummary(tvTotal, tvCart, tvSales)  // 数量変化時に更新
         }
         recycler.layoutManager = LinearLayoutManager(requireContext())
         recycler.adapter = adapter
 
-        // ── 初期表示の更新 ──
-        updateSummary(tvTotal, tvCart, tvSales)
+        val database = AppDatabase.getDatabase(requireContext())
+        val registrationDao = database.registrationDao()
+
+        // 全商品を取得するクエリを監視 (※Daoに全取得メソッドがない場合は下記参照)
+        registrationDao.getAllProducts().observe(viewLifecycleOwner) { productsFromDb ->
+            if (productsFromDb != null) {
+                productList.clear()
+                productList.addAll(productsFromDb)
+                adapter.notifyDataSetChanged()
+                updateSummary(tvTotal, tvCart, tvSales)
+            }
+        }
+
 
         // ── 購入ボタン ──
         btnBuy.setOnClickListener {
-            // 1. カートに入っている商品（数量 > 0）を抽出
             val cartItems = productList.filter { it.quantity > 0 }
-            
+
             if (cartItems.isEmpty()) {
                 Toast.makeText(requireContext(), "カートが空です", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            val total = cartItems.sumOf { it.price * it.quantity }
-            val dateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault())
-            val dateString = dateFormat.format(Date())
-
-            // 2. データベースへの保存処理 (非同期)
             lifecycleScope.launch {
-                val dao = AppDatabase.getDatabase(requireContext()).salesDao()
-                
-                cartItems.forEach { product ->
-                    val salesItem = SalesItem(
-                        productName = product.name,
-                        quantity = product.quantity,
-                        price = product.price,
-                        date = dateString
-                    )
-                    // コメントアウト：ここでDBに1件ずつ保存
-                    dao.insert(salesItem)
+                try {
+                    val dao = AppDatabase.getDatabase(requireContext()).salesDao()
+                    val dateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault())
+                    val dateString = dateFormat.format(Date())
+
+                    cartItems.forEach { product ->
+                        val salesItem = SalesItem(
+                            productName = product.name,
+                            quantity = product.quantity,
+                            price = product.price,
+                            date = dateString
+                        )
+                        dao.insert(salesItem)
+
+                        // 【重要】在庫を減らす場合は、DBの在庫も更新する必要がある
+                        // product.stock -= product.quantity (これはメモリ上だけ)
+                    }
+
+                    // カートのリセット
+                    productList.forEach { it.quantity = 0 }
+                    adapter.notifyDataSetChanged()
+                    updateSummary(tvTotal, tvCart, tvSales)
+
+                    Toast.makeText(requireContext(), "購入完了", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext(), "エラーが発生しました", Toast.LENGTH_SHORT).show()
                 }
-
-                // 3. 処理後のクリーンアップ
-                // コメントアウト：カート内数量をすべて0にリセット
-                productList.forEach { it.quantity = 0 }
-                
-                // 表示を更新
-                adapter.notifyDataSetChanged()
-                updateSummary(tvTotal, tvCart, tvSales)
-
-                Toast.makeText(requireContext(), "購入データを保存しました：¥$total", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     // ── サマリー更新ヘルパー ──
-    private fun updateSummary(
-        tvTotal: TextView,
-        tvCart: TextView, tvSales: TextView
-    ) {
-        val total    = productList.sumOf { it.price * it.quantity }
+    private fun updateSummary(tvTotal: TextView, tvCart: TextView, tvSales: TextView) {
+        val total    = productList.sumOf { it.price.toLong() * it.quantity } // Longに変換してオーバーフロー防止
         val cartQty  = productList.sumOf { it.quantity }
 
         tvTotal.text  = "¥$total"

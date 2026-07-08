@@ -16,7 +16,7 @@
 
         <!-- 商品名 -->
         <TextView
-            android:id="@+id/listPrductName"
+            android:id="@+id/listProductName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="商品名"
@@ -48,7 +48,7 @@
             android:textSize="13sp"
             android:textColor="@color/text_secondary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/listPrductName"
+            app:layout_constraintTop_toBottomOf="@id/listProductName"
             app:layout_constraintEnd_toStartOf="@id/btnMinus" />
 
         <!-- ー ボタン -->

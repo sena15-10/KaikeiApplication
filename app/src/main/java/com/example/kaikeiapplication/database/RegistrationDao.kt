@@ -27,6 +27,9 @@ interface RegistrationDao {
      * データベースの操作は時間がかかることがあるため、スマホの画面が固まらないように
      * 「裏側（バックグラウンド）」でこっそり実行するための印です。
      */
+
+    @Query("SELECT * FROM items WHERE isActivity = 1") // 削除されていない商品のみ取得
+    fun getAllProducts(): LiveData<List<Product>>
     @Insert
     suspend fun insert(product : Product)
 
