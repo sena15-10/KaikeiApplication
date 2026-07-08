@@ -32,7 +32,7 @@ class SalesAdapter(private var itemList: List<SalesItem>) :
 
         holder.tvProductName.text = item.productName
         holder.tvQuantity.text = "${item.quantity} 個"
-        holder.tvPrice.text = "¥${item.price}"
+        holder.tvPrice.text = "¥${item.price * item.quantity}"
         holder.tvDate.text = item.date
     }
 

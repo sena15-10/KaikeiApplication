@@ -21,17 +21,23 @@
             <!-- 商品名 -->
             <TextView
                 android:id="@+id/listProductName"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="商品名"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/editBtn"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
             <!-- 単価 -->
+
+            <!-- ー ボタン -->
+
+            <!-- 数量 -->
+
+            <!-- ＋ ボタン -->
+
             <TextView
                 android:id="@+id/listProductPrice"
                 android:layout_width="wrap_content"
@@ -40,14 +46,7 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="13sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/listSubtotal"
-                app:layout_constraintEnd_toStartOf="@+id/listSubtotal"
                 app:layout_constraintStart_toStartOf="parent" />
-
-            <!-- ー ボタン -->
-
-            <!-- 数量 -->
-
-            <!-- ＋ ボタン -->
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/editBtn"
@@ -88,9 +87,8 @@
                 android:gravity="end"
                 android:textSize="15sp"
                 android:text="在庫数"
-                app:layout_constraintEnd_toStartOf="@+id/listQuantityS"
                 app:layout_constraintStart_toEndOf="@+id/listProductPrice"
-                app:layout_constraintTop_toBottomOf="@+id/listPrductName" />
+                app:layout_constraintTop_toBottomOf="@+id/listProductName" />
 
             <TextView
                 android:id="@+id/listQuantityS"

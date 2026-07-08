@@ -75,21 +75,26 @@ class SalesFragment : Fragment() {
 
             lifecycleScope.launch {
                 try {
-                    val dao = AppDatabase.getDatabase(requireContext()).salesDao()
+                    val db = AppDatabase.getDatabase(requireContext())
+                    val salesDao = db.salesDao()
+                    val registrationDao = db.registrationDao() // 商品マスタ更新用に追加取得
+
                     val dateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault())
                     val dateString = dateFormat.format(Date())
 
                     cartItems.forEach { product ->
+                        // 1. 売上履歴を保存
                         val salesItem = SalesItem(
                             productName = product.name,
                             quantity = product.quantity,
                             price = product.price,
                             date = dateString
                         )
-                        dao.insert(salesItem)
+                        salesDao.insert(salesItem)
 
-                        // 【重要】在庫を減らす場合は、DBの在庫も更新する必要がある
-                        // product.stock -= product.quantity (これはメモリ上だけ)
+                        // 2. 【重要】在庫を減らし、データベースを更新する
+                        product.stock -= product.quantity // メモリ上の値を減らす
+                        registrationDao.update(product)   // ★これを追加：DBの値を更新（保存）する
                     }
 
                     // カートのリセット
@@ -97,7 +102,7 @@ class SalesFragment : Fragment() {
                     adapter.notifyDataSetChanged()
                     updateSummary(tvTotal, tvCart, tvSales)
 
-                    Toast.makeText(requireContext(), "購入完了", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "購入完了しました", Toast.LENGTH_SHORT).show()
                 } catch (e: Exception) {
                     Toast.makeText(requireContext(), "エラーが発生しました", Toast.LENGTH_SHORT).show()
                 }
