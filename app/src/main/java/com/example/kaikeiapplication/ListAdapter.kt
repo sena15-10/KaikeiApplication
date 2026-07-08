@@ -1,5 +1,6 @@
 package com.example.kaikeiapplication
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kaikeiapplication.model.Product
 
 
-class ListAdapter(private val product: List<Product>) :
+class ListAdapter(private var product: List<Product>) :
     RecyclerView.Adapter<ListAdapter.SalesViewHolder>(){
 
     class SalesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -35,16 +36,22 @@ class ListAdapter(private val product: List<Product>) :
         position: Int
     ) {
         val item = product[position]
-
+        Log.d("ITEM" , "$item")
         holder.listProductName.text = item.name
-        holder.listQuantity.text = item.stock.toString()
-        holder.listProductPrice.text = item.price.toString()
+        holder.listQuantity.text     = "${item.stock}個"
+        holder.listProductPrice.text = "¥${item.price} / 個"
     }
 
 
 
     override fun getItemCount(): Int {
         return product.size
+    }
+
+    fun updateList(newProduct: List<Product>){
+        Log.d("ITEM" , "${newProduct.size}")
+        product = newProduct
+        notifyDataSetChanged()
     }
 }
 

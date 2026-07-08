@@ -42,7 +42,10 @@ interface RegistrationDao {
      */
     @Delete
     suspend fun delete(item: Product)
-
+    // ★ここを追加する！全商品を取得するメソッド
+    // LiveDataにすると、データが変わったとき自動で画面が更新される
+    @Query("SELECT * FROM items")
+    fun getAllProducts(): LiveData<List<Product>>
     /**
      * 【検索・取得】特定の条件に合うデータをデータベースから取り出します。
      *
