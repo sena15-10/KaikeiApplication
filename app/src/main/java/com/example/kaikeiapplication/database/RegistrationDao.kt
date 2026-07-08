@@ -27,6 +27,7 @@ interface RegistrationDao {
      * データベースの操作は時間がかかることがあるため、スマホの画面が固まらないように
      * 「裏側（バックグラウンド）」でこっそり実行するための印です。
      */
+
     @Insert
     suspend fun insert(product : Product)
 

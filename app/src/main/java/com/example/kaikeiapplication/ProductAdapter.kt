@@ -18,7 +18,7 @@ class ProductAdapter(
 ) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvName:     TextView = view.findViewById(R.id.listPrductName)
+        val tvName:     TextView = view.findViewById(R.id.listProductName)
         val tvPrice:    TextView = view.findViewById(R.id.listProductPrice)
         val tvQuantity: TextView = view.findViewById(R.id.tvQuantity)
         val tvSubtotal: TextView = view.findViewById(R.id.listSubtotal)
