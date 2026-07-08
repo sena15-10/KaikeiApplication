@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kaikeiapplication.database.AppDatabase
@@ -26,6 +27,9 @@ class ProductList : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val tvProductTypeCount = view.findViewById<TextView>(R.id.textView6)
+        val tvTotalStockCount = view.findViewById<TextView>(R.id.itemNumber)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.registerProducts)
         super.onViewCreated(view, savedInstanceState)
         //データベースのインスタンスを取得する。
         db = AppDatabase.getDatabase(requireContext())
@@ -52,7 +56,7 @@ class ProductList : Fragment() {
         addButton?.setOnClickListener {
             (activity as? MainActivity)?.replaceFragment(SaveItemFragment())
         }
-        val recyclerView = view.findViewById<RecyclerView>(R.id.registerProducts)
+
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         //LinearLayoutは縦方向に１列ずつ並べる設定
         recyclerView.adapter = adapter
@@ -60,6 +64,20 @@ class ProductList : Fragment() {
         db.registrationDao().getAllProducts().observe(viewLifecycleOwner) { products ->
             Log.d("ProductList", "取得件数：${products.size}件")
             adapter.updateList(products)
+        }
+
+        db.registrationDao().getAllProducts().observe(viewLifecycleOwner) { products ->
+            adapter.updateList(products)
+
+            //登録済み商品数の計算
+            val typeCount = products.size
+            tvProductTypeCount.text = typeCount.toString()
+
+            //在庫数の計算
+            var totalStock = products.sumOf { it.stock }
+            tvTotalStockCount.text = totalStock.toString()
+
+            Log.d("ProductList", "取得件数：${products.size}件")
         }
 
     }
