@@ -73,7 +73,7 @@ class ProductList : Fragment() {
             val typeCount = products.size
             tvProductTypeCount.text = typeCount.toString()
 
-            //在庫数の計算
+            //在庫数の合計計算
             var totalStock = products.sumOf { it.stock }
             tvTotalStockCount.text = totalStock.toString()
 
