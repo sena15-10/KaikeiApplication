@@ -36,7 +36,7 @@ interface RegistrationDao {
      * 例えば、商品の名前や価格を修正した時に使います。
      */
     @Update
-    suspend fun update(item: Product)
+    suspend fun update(product: Product)
 
     /**
      * 【削除】指定したデータをデータベースから完全に消去します。
@@ -62,4 +62,8 @@ interface RegistrationDao {
      */
     @Query("SELECT * FROM items WHERE stock <= :threshold")
     fun getLowStockItems(threshold: Int): LiveData<List<Product>>
+
+    @Query("SELECT * FROM items WHERE id = :id LIMIT 1")
+    suspend fun getProductById(id: Int): Product?
+
 }
