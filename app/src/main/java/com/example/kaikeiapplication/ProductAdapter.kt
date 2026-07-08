@@ -50,7 +50,7 @@ class ProductAdapter(
 
         holder.btnPlus.setOnClickListener {
             // 在庫数（product.stock）を超えない範囲で、商品の数量を1増やす
-            if (product.quantity < product.stock + product.quantity) {
+            if (product.quantity < product.stock) {
                 product.quantity++
 
                 // 特定の行の表示（数量と小計）を更新するためにアダプターへ通知
