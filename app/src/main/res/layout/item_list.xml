@@ -34,7 +34,7 @@
             <!-- 単価 -->
             <TextView
                 android:id="@+id/listProductPrice"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¥0 / 個"
                 android:textColor="@android:color/darker_gray"
@@ -77,14 +77,14 @@
 
             <TextView
                 android:id="@+id/listSubtotal"
-                android:layout_width="72dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:textSize="15sp"
+                android:text="在庫数"
                 app:layout_constraintEnd_toStartOf="@+id/listQuantityS"
                 app:layout_constraintStart_toEndOf="@+id/listProductPrice"
-                app:layout_constraintTop_toBottomOf="@+id/listPrductName"
-                tools:text="在庫数" />
+                app:layout_constraintTop_toBottomOf="@+id/listPrductName" />
 
             <TextView
                 android:id="@+id/listQuantityS"

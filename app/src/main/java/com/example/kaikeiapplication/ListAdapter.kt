@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kaikeiapplication.model.Product
 
 
-class ListAdapter(private var product: List<Product>) :
+class ListAdapter(private var product: List<Product>,
+        private val onEditClick: (Product) -> Unit) : //編集ボタンを押したとき
     RecyclerView.Adapter<ListAdapter.SalesViewHolder>(){
 
     class SalesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -26,6 +27,7 @@ class ListAdapter(private var product: List<Product>) :
      * item_sales_row.xml を元に1行分のレイアウトを生成します。
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesViewHolder {
+
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_list, parent, false)
         return SalesViewHolder(view)
@@ -36,6 +38,10 @@ class ListAdapter(private var product: List<Product>) :
         position: Int
     ) {
         val item = product[position]
+        //編集ボタンが押されたときに、渡された関数を実行する
+        holder.itemView.findViewById<Button>(R.id.editBtn).setOnClickListener {
+            onEditClick(item)
+        }
         Log.d("ITEM" , "$item")
         holder.listProductName.text = item.name
         holder.listQuantity.text     = "${item.stock}個"

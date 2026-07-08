@@ -32,7 +32,22 @@ class ProductList : Fragment() {
 //        アダプターの初期化
         adapter = ListAdapter(
             product = emptyList(),
+            //編集ボタンの処理
+            onEditClick = { product ->
+                Log.d("編集ボタンがクリックされた", "商品ID: ${product.id}")
+                val bundle = Bundle().apply {
+                    putInt("productId", product.id)
+                }
+                //遷移先のfragmentを作成して引数をセットする
+                val fragment = SaveItemFragment().apply {
+                    arguments = bundle
+                }
+                //画面遷移を実行(既存のreplaceFragmentを利用)
+                (activity as? MainActivity)?.replaceFragment(fragment)
+            }
         )
+
+
         val addButton = view.findViewById<FloatingActionButton>(R.id.fadAddProduct2)
         addButton?.setOnClickListener {
             (activity as? MainActivity)?.replaceFragment(SaveItemFragment())
@@ -48,6 +63,4 @@ class ProductList : Fragment() {
         }
 
     }
-
-
 }
