@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="16dp"
+    app:cardCornerRadius="16dp"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#F5F5F5">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+
+            <ImageButton
+                android:id="@+id/btnCloseCalc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_close_clear_cancel" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvCalcDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@android:color/white"
+            android:gravity="center_vertical|end"
+            android:padding="12dp"
+            android:text="0"
+            android:textSize="24sp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- ボタングリッド -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="4">
+
+            <!-- 1行目: AC, ▶, ( ), ÷ -->
+            <Button
+                android:id="@+id/btnCalcAC"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="AC"
+                android:textColor="@android:color/holo_red_dark" />
+
+            <Button
+                android:id="@+id/btnCalcBack"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="▶" />
+
+            <!-- ( ) を1マスの中に2分割で配置 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnCalcOpenBracket"
+                    style="?attr/materialButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="0dp"
+                    android:insetLeft="2dp"
+                    android:insetRight="2dp"
+                    android:text="(" />
+
+                <Button
+                    android:id="@+id/btnCalcCloseBracket"
+                    style="?attr/materialButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="0dp"
+                    android:insetLeft="2dp"
+                    android:insetRight="2dp"
+                    android:text=")" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnCalcDiv"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="÷" />
+
+            <!-- 2行目: 7, 8, 9, × -->
+            <Button
+                android:id="@+id/btnCalc7"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="7" />
+
+            <Button
+                android:id="@+id/btnCalc8"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="8" />
+
+            <Button
+                android:id="@+id/btnCalc9"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="9" />
+
+            <Button
+                android:id="@+id/btnCalcMulti"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="×" />
+
+            <!-- 3行目: 4, 5, 6, - -->
+            <Button
+                android:id="@+id/btnCalc4"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="4" />
+
+            <Button
+                android:id="@+id/btnCalc5"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="5" />
+
+            <Button
+                android:id="@+id/btnCalc6"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="6" />
+
+            <Button
+                android:id="@+id/btnCalcMinus"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="-" />
+
+            <!-- 4行目: 1, 2, 3, + -->
+            <Button
+                android:id="@+id/btnCalc1"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="1" />
+
+            <Button
+                android:id="@+id/btnCalc2"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="2" />
+
+            <Button
+                android:id="@+id/btnCalc3"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="3" />
+
+            <Button
+                android:id="@+id/btnCalcPlus"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="+" />
+
+            <!-- 5行目: 0, 00, ., = -->
+            <Button
+                android:id="@+id/btnCalc0"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="0" />
+
+            <Button
+                android:id="@+id/btnCalc00"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="00" />
+
+            <Button
+                android:id="@+id/btnCalcDot"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:text="." />
+
+            <Button
+                android:id="@+id/btnCalcEqual"
+                style="?attr/materialButtonStyle"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:backgroundTint="@color/design_default_color_primary"
+                android:text="="
+                android:textColor="@android:color/white" />
+
+        </GridLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
