@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -42,6 +43,10 @@ class SalesFragment : Fragment() {
         val tvCart    = view.findViewById<TextView>(R.id.tvCartCount)
         val tvSales   = view.findViewById<TextView>(R.id.tvTotalAmount)
         val btnBuy    = view.findViewById<Button>(R.id.btnPurchase)
+        val fabCalculator = view.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fabCalculator)
+        val layoutCalculator = view.findViewById<View>(R.id.layoutCalculator)
+        val btnCloseCalc = view.findViewById<ImageButton>(R.id.btnCloseCalc)
+        val tvDisplay = view.findViewById<TextView>(R.id.tvCalcDisplay)
 
         // ── RecyclerViewのセットアップ ──
         adapter = ProductAdapter(productList) {
@@ -108,6 +113,76 @@ class SalesFragment : Fragment() {
                 }
             }
         }
+
+        // 2. 電卓ボタンを押した時の処理
+        fabCalculator?.setOnClickListener {    if (layoutCalculator?.visibility == View.VISIBLE) {
+            // もし今見えているなら、隠す
+            layoutCalculator?.visibility = View.GONE
+        } else {
+            // もし隠れているなら、表示する
+            layoutCalculator?.visibility = View.VISIBLE
+        }
+        }
+
+        // 3. 閉じるボタン（×）を押した時の処理
+        btnCloseCalc.setOnClickListener {
+            // 電卓を隠す
+            layoutCalculator.visibility = View.GONE
+            // 電卓ボタンを再表示する
+            fabCalculator.show()
+        }
+
+        // --- ここから追加：電卓の各ボタンの処理 ---
+        val buttons = mapOf(            R.id.btnCalc0 to "0", R.id.btnCalc00 to "00", R.id.btnCalc1 to "1",
+            R.id.btnCalc2 to "2", R.id.btnCalc3 to "3", R.id.btnCalc4 to "4",
+            R.id.btnCalc5 to "5", R.id.btnCalc6 to "6", R.id.btnCalc7 to "7",
+            R.id.btnCalc8 to "8", R.id.btnCalc9 to "9", R.id.btnCalcDot to ".",
+            R.id.btnCalcPlus to "+", R.id.btnCalcMinus to "-",
+            R.id.btnCalcMulti to "×", R.id.btnCalcDiv to "÷",
+            R.id.btnCalcOpenBracket to "(", R.id.btnCalcCloseBracket to ")"
+        )
+
+        var expression = ""
+
+// 数字・演算ボタンのクリック設定
+        buttons.forEach { (id, value) ->
+            view.findViewById<Button>(id)?.setOnClickListener {
+                expression += value
+                tvDisplay.text = expression
+            }
+        }
+
+// ACボタン（全消去）
+        view.findViewById<Button>(R.id.btnCalcAC)?.setOnClickListener {
+            expression = ""
+            tvDisplay.text = "0"
+        }
+
+// ▶ボタン（一文字消去）
+        view.findViewById<Button>(R.id.btnCalcBack)?.setOnClickListener {
+            if (expression.isNotEmpty()) {
+                expression = expression.substring(0, expression.length - 1)
+                tvDisplay.text = if (expression.isEmpty()) "0" else expression
+            }
+        }
+
+/// ＝ボタン（計算実行）の部分
+        view.findViewById<Button>(R.id.btnCalcEqual)?.setOnClickListener {
+            if (expression.isEmpty()) return@setOnClickListener
+            try {
+                val formula = expression.replace("×", "*").replace("÷", "/")
+                val result = net.objecthunter.exp4j.ExpressionBuilder(formula).build().evaluate()
+                val resultStr = if (result % 1 == 0.0) result.toLong().toString() else result.toString()
+
+                // tvDisplay?.text (セーフコール) を使う
+                tvDisplay?.text = resultStr
+                expression = resultStr
+            } catch (e: Exception) {
+                tvDisplay?.text = "Error"
+                expression = ""
+            }
+        }
+
     }
 
     // ── サマリー更新ヘルパー ──
