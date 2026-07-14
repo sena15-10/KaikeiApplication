@@ -1,18 +1,26 @@
 package com.example.kaikeiapplication.saleshistory
 
 import android.os.Bundle
+import android.view.ContextMenu
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kaikeiapplication.R
-import com.example.kaikeiapplication.saleshistory.SalesAdapter
 import com.example.kaikeiapplication.database.AppDatabase
 import com.example.kaikeiapplication.model.SalesItem
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.math.ceil
 
 /**
@@ -27,6 +35,11 @@ class PurchaaseHistory : Fragment() {
     private var salesList: List<SalesItem> = emptyList()
 
     private lateinit var adapter: SalesAdapter
+
+    companion object {
+        // 全削除の確認に使うパスワード
+        private const val DELETE_ALL_PASSWORD = "PassWord123"
+    }
 
     // ── ライフサイクル ───────────────────────────
     override fun onCreateView(
@@ -45,11 +58,24 @@ class PurchaaseHistory : Fragment() {
         val btnPrev = view.findViewById<Button>(R.id.btnPrev)
         val btnNext = view.findViewById<Button>(R.id.btnNext)
         val tvPageInfo = view.findViewById<TextView>(R.id.tvPageInfo)
+        val btnOverflowMenu = view.findViewById<View>(R.id.btnOverflowMenu)
+        val layoutPagination = view.findViewById<View>(R.id.layoutPagination)
+        val layoutSelectionActionBar = view.findViewById<View>(R.id.layoutSelectionActionBar)
+        val btnDeleteSelected = view.findViewById<Button>(R.id.btnDeleteSelected)
 
         // 2. RecyclerView の初期セットアップ
-        adapter = SalesAdapter(emptyList())
+        adapter = SalesAdapter(emptyList()) { isSelectionMode, _ ->
+            // ── STEP 4: BottomActionBarをVISIBLEにする ──
+            // 理由: 選択モード中はページ送りの代わりに削除操作をできるようにするため
+            layoutSelectionActionBar.visibility = if (isSelectionMode) View.VISIBLE else View.GONE
+            layoutPagination.visibility = if (isSelectionMode) View.GONE else View.VISIBLE
+        }
         rvSalesHistory.layoutManager = LinearLayoutManager(requireContext())
         rvSalesHistory.adapter = adapter
+
+        // 長押し選択モードの開始トリガー自体はAdapter側(itemViewのOnLongClickListener)で処理する。
+        // ここでは選択削除の確認フローで使うContextMenuの窓口だけを用意しておく。
+        registerForContextMenu(rvSalesHistory)
 
         // 3. リスナーの設定
         btnPrev.setOnClickListener {
@@ -65,6 +91,30 @@ class PurchaaseHistory : Fragment() {
                 currentPage++
                 showPage(tvPageInfo, btnPrev, btnNext)
             }
+        }
+
+        btnOverflowMenu.setOnClickListener { anchor ->
+            // ── STEP 1: OverflowMenuのアイテムがタップされたか確認する ──
+            // 理由: どのメニュー項目が選ばれたかによって処理を振り分けるため
+            val popupMenu = PopupMenu(requireContext(), anchor)
+            popupMenu.menuInflater.inflate(R.menu.menu_purchase_history, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.action_delete_all -> {
+                        showDeleteAllPasswordDialog(view)
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popupMenu.show()
+        }
+
+        btnDeleteSelected.setOnClickListener {
+            // TODO: [別担当] "選択削除"ボタン押下後のContextMenuによる
+            //              削除確認ダイアログを実装する
+            //              → registerForContextMenu() / onContextItemSelected() を使用すること
+            // TODO: [別担当] 削除実行後のリスト更新とAdapter通知を実装する
         }
 
         // 4. データベースからデータを取得して監視
@@ -83,6 +133,57 @@ class PurchaaseHistory : Fragment() {
             showPage(tvPageInfo, btnPrev, btnNext)
             updateSalesSummary(view, salesList)
         }
+    }
+
+    // ── OverflowMenu: 全削除（パスワード認証） ───────────
+
+    private fun showDeleteAllPasswordDialog(rootView: View) {
+        // ── STEP 2: パスワード入力ダイアログを生成する ──
+        // 理由: 誤操作による全件削除を防ぐため、パスワードによる確認を挟む
+        val dialogView = layoutInflater.inflate(R.layout.dialog_password_confirm, null)
+        val etPassword = dialogView.findViewById<TextInputEditText>(R.id.etPassword)
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.dialogTitleDeleteAll)
+            .setMessage(R.string.dialogMessageDeleteAll)
+            .setView(dialogView)
+            .setPositiveButton(R.string.btnDelete) { _, _ ->
+                // ── STEP 3: 入力値と正解パスワードを比較する ──
+                // 理由: 一致しない限りデータを削除しないようにするため
+                val inputPassword = etPassword.text?.toString().orEmpty()
+                if (inputPassword == DELETE_ALL_PASSWORD) {
+                    // ── STEP 4: 一致 → リスト全件を削除してAdapterに通知する ──
+                    // 理由: データの実体はRoom(DB)にあるため、Daoで全件削除し、
+                    //       画面のAdapterはgetAllSales()のLiveData監視結果で自動更新させる
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        AppDatabase.Companion.getDatabase(requireContext()).salesDao().deleteAll()
+                    }
+                } else {
+                    // ── STEP 5: 不一致 → エラーメッセージを表示して何もしない ──
+                    Snackbar.make(rootView, R.string.errorPasswordMismatch, Snackbar.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton(R.string.btnCancel, null)
+            .show()
+    }
+
+    // ── 選択削除フロー用のContextMenuの窓口 ──────────────
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        // TODO: [別担当] "選択削除"ボタン押下後のContextMenuによる
+        //              削除確認ダイアログを実装する
+        //              → ここに確認用のMenuItem（例:「削除する」「キャンセル」）を追加する
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        // TODO: [別担当] 選択されたMenuItemに応じて選択中アイテムの削除確認処理を実行する
+        // TODO: [別担当] 削除実行後のリスト更新とAdapter通知を実装する
+        return super.onContextItemSelected(item)
     }
 
     // ── ヘルパーメソッド ─────────────────────────
