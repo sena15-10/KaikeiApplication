@@ -10,6 +10,18 @@
     android:background="@drawable/bg_item_row"
     android:padding="16dp">
 
+    <!-- 選択モード中のみ表示するチェックボックス（長押しで選択モードに入ると表示される） -->
+    <CheckBox
+        android:id="@+id/cbSelect"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        android:contentDescription="@string/contentDescriptionSelectItem"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
     <!-- 商品名 -->
     <TextView
         android:id="@+id/tvProductName"
@@ -21,7 +33,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tvQuantity"
         app:layout_constraintHorizontal_weight="3"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cbSelect"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- 個数 -->

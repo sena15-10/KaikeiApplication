@@ -146,24 +146,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
+    <!-- 全削除などを行うOverflowMenu（⋮）を開くボタン -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnOverflowMenu"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/contentDescriptionOverflowMenu"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="0dp"
+        android:text="⋮"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView15" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSalesHistory"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/layoutPagination"
+        app:layout_constraintBottom_toTopOf="@+id/barrierBottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15"
         app:layout_constraintVertical_bias="0.0" />
+
+    <!-- ページネーションバーと選択モード用アクションバーは排他的に表示されるため、
+         表示中の方の上端にRecyclerViewの下端を追従させるBarrier -->
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierBottomBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="layoutPagination,layoutSelectionActionBar" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.98" />
 
     <ImageView
         android:id="@+id/nothingImg"
@@ -235,5 +265,14 @@
 
     </LinearLayout>
 
+    <!-- 選択モード中に表示するボトムアクションバー（「選択削除」ボタン） -->
+    <include
+        android:id="@+id/layoutSelectionActionBar"
+        layout="@layout/bottom_selection_action_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

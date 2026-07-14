@@ -63,6 +63,18 @@
 <!--    何もないとき-->
     <string name="tvNothing">なにもない</string>
 
+    <!-- 売上履歴 全削除機能 -->
+    <string name="menuDeleteAll">全削除</string>
+    <string name="dialogTitleDeleteAll">全データ削除</string>
+    <string name="dialogMessageDeleteAll">パスワードを入力してください</string>
+    <string name="hintPassword">パスワード</string>
+    <string name="errorPasswordMismatch">パスワードが違います</string>
+    <string name="contentDescriptionOverflowMenu">メニュー</string>
+
+    <!-- 売上履歴 選択削除機能 -->
+    <string name="contentDescriptionSelectItem">選択</string>
+    <string name="btnDeleteSelected">選択削除</string>
+
 
 <!--削除するとき-->
     <string name="tvdelete">商品を削除しますか？</string>
