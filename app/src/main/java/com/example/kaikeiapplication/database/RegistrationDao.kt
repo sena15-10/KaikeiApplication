@@ -47,4 +47,12 @@ interface RegistrationDao {
      */
     @Query("SELECT * FROM items WHERE id = :id LIMIT 1")
     suspend fun getProductById(id: Int): Product?
+
+    /**
+     * 【商品名検索】商品名から商品を1件取得します。
+     * 売上履歴(SalesItem)は商品IDではなく商品名しか持っていないため、
+     * 売上削除時に在庫を戻す商品を特定するのに使用します。
+     */
+    @Query("SELECT * FROM items WHERE name = :name LIMIT 1")
+    suspend fun getProductByName(name: String): Product?
 }

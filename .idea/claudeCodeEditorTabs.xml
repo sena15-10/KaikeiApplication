@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ClaudeCodeEditorTabs">
+    <option name="activeSessionId" value="960013df-a064-400c-9abc-a6d23fa559e5" />
+    <option name="openSessionIds">
+      <list>
+        <option value="3f28bce3-4fb1-47af-b081-ae07f991741f" />
+        <option value="6f826960-a7de-4d79-b517-dd587b7b81f1" />
+        <option value="960013df-a064-400c-9abc-a6d23fa559e5" />
+      </list>
+    </option>
+    <option name="sessionPaths">
+      <map>
+        <entry key="6f826960-a7de-4d79-b517-dd587b7b81f1" value="/switch-account" />
+        <entry key="960013df-a064-400c-9abc-a6d23fa559e5" value="/sessions/0f9dd2de-308b-4883-8c77-dbb90a0483b8" />
+      </map>
+    </option>
+    <option name="sessionTitles">
+      <map>
+        <entry key="6f826960-a7de-4d79-b517-dd587b7b81f1" value="Claude Code" />
+        <entry key="960013df-a064-400c-9abc-a6d23fa559e5" value="あなたは、最高の開発者です。 今現在デバックで、売り上げがある状態なのですが、これを全削除、または、" />
+      </map>
+    </option>
+  </component>
+</project>

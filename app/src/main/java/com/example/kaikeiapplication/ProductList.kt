@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope // ここに移動
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,9 @@ class ProductList : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         db = AppDatabase.getDatabase(requireContext())
+
+        val textProductCount = view.findViewById<TextView>(R.id.textProductCount)
+        val textTotalStock = view.findViewById<TextView>(R.id.itemNumber)
 
         adapter = ListAdapter(
             product = emptyList(),
@@ -70,6 +74,11 @@ class ProductList : Fragment() {
         db.registrationDao().getAllProducts().observe(viewLifecycleOwner) { products ->
             Log.d("ProductList", "取得件数：${products.size}件")
             adapter.updateList(products)
+            //登録済み商品数の表示
+            textProductCount?.text = "${products.size}件"
+            //合計在庫数の表示
+            val totalStock = products.sumOf { it.stock }
+            textTotalStock?.text = "${totalStock}個"
         }
     }
 }
