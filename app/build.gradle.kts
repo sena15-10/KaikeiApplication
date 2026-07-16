@@ -42,7 +42,10 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+    // Firebaseのバージョンをまとめて管理する仕組み(BoM)
     implementation(platform("com.google.firebase:firebase-bom:34.16.0"))
+    // Firestore(クラウドDB)本体。バージョンはBoMが自動で決めるので指定しない
+    implementation("com.google.firebase:firebase-firestore")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
