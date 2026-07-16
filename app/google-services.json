@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1079674019893",
+    "project_id": "device-streaming-5f4225a4",
+    "storage_bucket": "device-streaming-5f4225a4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079674019893:android:808cb4ba672bb82307517c",
+        "android_client_info": {
+          "package_name": "com.example.kaikeiapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqJ-uZ2SOrYXQXnw271dggogOgFzsMXOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
