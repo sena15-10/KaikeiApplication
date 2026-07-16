@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ClaudeCodeEditorTabs">
-    <option name="activeSessionId" value="6f826960-a7de-4d79-b517-dd587b7b81f1" />
+    <option name="activeSessionId" value="c9d7cfb9-5a72-490c-9189-96afbf1444d6" />
     <option name="openSessionIds">
       <list>
         <option value="3f28bce3-4fb1-47af-b081-ae07f991741f" />
         <option value="6f826960-a7de-4d79-b517-dd587b7b81f1" />
+        <option value="38f3500b-5cb0-457a-9b25-44d6ceed4180" />
+        <option value="c9d7cfb9-5a72-490c-9189-96afbf1444d6" />
       </list>
     </option>
     <option name="sessionPaths">
       <map>
+        <entry key="38f3500b-5cb0-457a-9b25-44d6ceed4180" value="/sessions/new" />
         <entry key="6f826960-a7de-4d79-b517-dd587b7b81f1" value="/switch-account" />
+        <entry key="c9d7cfb9-5a72-490c-9189-96afbf1444d6" value="/sessions/0f9dd2de-308b-4883-8c77-dbb90a0483b8" />
       </map>
     </option>
     <option name="sessionTitles">
       <map>
+        <entry key="38f3500b-5cb0-457a-9b25-44d6ceed4180" value="Claude Code" />
         <entry key="6f826960-a7de-4d79-b517-dd587b7b81f1" value="Claude Code" />
+        <entry key="c9d7cfb9-5a72-490c-9189-96afbf1444d6" value="あなたは、最高の開発者です。 今現在デバックで、売り上げがある状態なのですが、これを全削除、または、" />
       </map>
     </option>
   </component>
