@@ -116,10 +116,12 @@ class PurchaaseHistory : Fragment() {
             popupMenu.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.action_delete_all -> {
-                        // 全削除: パスワード確認後、Dao経由でDBの全件を削除する
+                        // 全削除: パスワード確認後、削除する分の在庫を戻してからDBの全件を削除する
                         // (AdapterはgetAllSales()のLiveData監視結果で自動更新される)
+                        val itemsToDelete = salesList
                         showPasswordConfirmDialog(view) {
                             lifecycleScope.launch(Dispatchers.IO) {
+                                restoreStockForDeletedSales(itemsToDelete)
                                 AppDatabase.Companion.getDatabase(requireContext()).salesDao().deleteAll()
                             }
                         }
@@ -157,8 +159,11 @@ class PurchaaseHistory : Fragment() {
             if (selectedIds.isEmpty()) return@setOnClickListener
 
             // 2. 全削除と同じパスワード確認ダイアログを使い、選択されたIDだけを削除する
+            val itemsToDelete = salesList.filter { selectedIds.contains(it.id) }
             showPasswordConfirmDialog(view) {
                 lifecycleScope.launch(Dispatchers.IO) {
+                    // 削除する分の在庫を戻してから、選択された行だけを削除する
+                    restoreStockForDeletedSales(itemsToDelete)
                     AppDatabase.Companion.getDatabase(requireContext()).salesDao()
                         .deleteItemByIds(selectedIds.toList())
                 }
@@ -215,6 +220,24 @@ class PurchaaseHistory : Fragment() {
             }
             .setNegativeButton(R.string.btnCancel, null)
             .show()
+    }
+
+    // ── 削除時の在庫復元 ─────────────────────────────
+
+    /**
+     * 削除される売上履歴の分だけ、対応する商品の在庫を元に戻す。
+     * 理由: 売上を削除しても在庫がそのままだと、実際の在庫数と帳簿上の数が食い違ってしまうため。
+     * SalesItemは商品IDを持たず商品名しか保持していないため、商品名でProductを検索して更新する。
+     */
+    private suspend fun restoreStockForDeletedSales(items: List<SalesItem>) {
+        val registrationDao = AppDatabase.Companion.getDatabase(requireContext()).registrationDao()
+        items.forEach { item ->
+            val product = registrationDao.getProductByName(item.productName)
+            if (product != null) {
+                product.stock += item.quantity
+                registrationDao.update(product)
+            }
+        }
     }
 
     // ── OverflowMenu: CSVエクスポート ────────────────────

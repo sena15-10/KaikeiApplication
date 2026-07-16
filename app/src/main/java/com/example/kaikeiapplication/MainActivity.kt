@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.fragment_product_register -> {
-                    replaceFragment(ProductRegisterFragment())
+                    replaceFragment(ProductList())
                     true
                 }
                 R.id.fragment_purchase_history -> {

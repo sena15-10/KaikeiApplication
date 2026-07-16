@@ -15,6 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kaikeiapplication.database.AppDatabase
 import com.example.kaikeiapplication.model.Product
 import com.example.kaikeiapplication.model.SalesItem
+// Firebaseアプリの情報を取得するための機能
+import com.google.firebase.FirebaseApp
+// Firestore(クラウドDB)を操作するための機能
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -96,6 +100,30 @@ class SalesFragment : Fragment() {
                             date = dateString
                         )
                         salesDao.insert(salesItem)
+
+                        // 1-5. 厨房モニター用にFirestore(クラウドDB)へも注文を書き込む
+                        try {
+                            // 厨房に送る注文データを1件分作る(キーと値のセット)
+                            val order = hashMapOf(
+                                "productName" to product.name,          // 商品名
+                                "quantity"    to product.quantity,      // 個数
+                                "price"       to product.price,         // 単価
+                                "status"      to "未提供",              // 作成時は必ず「未提供」
+                                "createdAt"   to System.currentTimeMillis() // 注文された時刻
+                            )
+                            // Firestoreの「orders」保管場所に、この注文を新規追加する
+                            // ※ 何も指定しないと予約済みの"(default)"データベースを探しに行ってしまうため、
+                            //   自分たちが作った"default"という名前のデータベースを明示的に指定する
+                            val firestoreDb = FirebaseFirestore.getInstance(FirebaseApp.getInstance(), "default")
+                            firestoreDb.collection("orders").add(order)
+                                // 通信失敗などで送信に失敗したときの処理(アプリは止めない)
+                                .addOnFailureListener {
+                                    Toast.makeText(requireContext(), "厨房への通知に失敗しました", Toast.LENGTH_SHORT).show()
+                                }
+                        } catch (e: Exception) {
+                            // Firebase未初期化など、その場で起きた例外も受け止めてアプリを守る
+                            Toast.makeText(requireContext(), "厨房への通知に失敗しました", Toast.LENGTH_SHORT).show()
+                        }
 
                         // 2. 【重要】在庫を減らし、データベースを更新する
                         product.stock -= product.quantity // メモリ上の値を減らす
