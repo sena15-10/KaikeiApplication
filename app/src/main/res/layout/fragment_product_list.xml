@@ -60,7 +60,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textProductCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/countLabel"
                 android:textSize="16sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textProductCount"
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
