@@ -32,7 +32,10 @@ interface SalesDao {
      */
     @Query("SELECT * FROM sales ORDER BY id DESC LIMIT 1")
     fun getLatestSale(): LiveData<SalesItem>
-
+    /** 売り上げ履歴を任意削除するためにしている。
+     * idsは、削除対象のIDのリスト**/
+    @Query("DELETE FROM sales WHERE id IN (:ids)")
+    suspend fun deleteItemByIds(ids: List<Int>)
     /**
      * 特定の期間の履歴を取得する（拡張性）
      * 使用例: 今日の履歴だけ、などの絞り込み

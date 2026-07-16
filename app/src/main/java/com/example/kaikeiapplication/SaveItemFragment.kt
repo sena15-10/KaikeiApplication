@@ -1,5 +1,6 @@
 package com.example.kaikeiapplication
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,6 +33,7 @@ class SaveItemFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_save_item, container, false)
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        引数からidを取得

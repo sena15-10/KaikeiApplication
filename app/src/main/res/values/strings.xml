@@ -78,4 +78,15 @@
     <string name="tvdelete">商品を削除しますか？</string>
     <string name="yesBtn">削除する</string>
     <string name="noBtn">キャンセル</string>
+
+    <!-- 売上履歴 日付フィルター -->
+    <string name="hintDateFilter">日付で絞り込み（例: 2026/01/01）</string>
+    <string name="btnApplyFilter">絞り込む</string>
+    <string name="btnClearFilter">解除</string>
+
+    <!-- 売上履歴 CSVエクスポート -->
+    <string name="menuCsvExport">CSVエクスポート</string>
+    <string name="csvExportSuccess">%1$s を保存しました</string>
+    <string name="csvExportFailure">エクスポートに失敗しました</string>
+    <string name="csvExportUnsupportedVersion">この端末のAndroidバージョンでは対応していません</string>
 </resources>

@@ -167,6 +167,53 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView15" />
 
+    <!-- 日付で履歴を絞り込むフィルターUI（絞り込んだ内容はCSVエクスポートにも反映される） -->
+    <LinearLayout
+        android:id="@+id/layoutDateFilter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="17dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15">
+
+        <EditText
+            android:id="@+id/etDateFilter"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:hint="@string/hintDateFilter"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnApplyFilter"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:minWidth="48dp"
+            android:text="@string/btnApplyFilter"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnClearFilter"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="4dp"
+            android:minWidth="48dp"
+            android:text="@string/btnClearFilter"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSalesHistory"
         android:layout_width="0dp"
@@ -176,7 +223,7 @@
         app:layout_constraintBottom_toTopOf="@+id/barrierBottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/layoutDateFilter"
         app:layout_constraintVertical_bias="0.0" />
 
     <!-- ページネーションバーと選択モード用アクションバーは排他的に表示されるため、
